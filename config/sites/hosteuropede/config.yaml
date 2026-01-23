@@ -1,0 +1,29 @@
+base: /
+dependencies:
+  - host-europe/hosteurope-template
+  - typo3/fluid-styled-content
+languages:
+  -
+    title: German
+    enabled: true
+    languageId: 0
+    base: /
+    locale: de_DE
+    navigationTitle: ''
+    flag: de
+    hreflang: ''
+    websiteTitle: ''
+  -
+    title: English
+    enabled: true
+    locale: en-GB
+    hreflang: ''
+    base: /en/
+    websiteTitle: ''
+    navigationTitle: ''
+    fallbackType: strict
+    fallbacks: ''
+    flag: gb
+    languageId: 1
+rootPageId: 1
+websiteTitle: ''

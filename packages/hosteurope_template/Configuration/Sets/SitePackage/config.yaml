@@ -1,0 +1,5 @@
+name: host-europe/hosteurope-template
+label: 'HostEurope Template'
+dependencies:
+  - typo3/fluid-styled-content
+  - typo3/fluid-styled-content-css

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a751fdadce06bf32e23bd53515ca93ba",
+    "content-hash": "c9fe5ff6bf654edf2be9eb4950dacf7c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1138,6 +1138,42 @@
                 }
             ],
             "time": "2025-08-23T21:21:41+00:00"
+        },
+        {
+            "name": "host-europe/hosteurope-template",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./packages/hosteurope_template",
+                "reference": "ed6a43ae3494ced15acae8b91de4e5aa96e663bf"
+            },
+            "require": {
+                "typo3/cms-core": "^13.4",
+                "typo3/cms-fluid-styled-content": "^13.4",
+                "typo3/cms-rte-ckeditor": "^13.4"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "hosteurope_template"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "HostEuropeGmbh\\HosteuropeTemplate\\": "Classes/"
+                }
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "TYPO3 Template for Host Europe GmbH",
+            "homepage": "https://www.hosteurope.de",
+            "keywords": [
+                "TYPO3 CMS"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "lolli42/finediff",
@@ -7033,7 +7069,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "host-europe/hosteurope-template": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},

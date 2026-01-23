@@ -1,0 +1,23 @@
+{
+    "name": "host-europe/hosteurope-template",
+    "type": "typo3-cms-extension",
+    "description": "TYPO3 Template for Host Europe GmbH",
+    "homepage": "https://www.hosteurope.de",
+    "license": ["GPL-2.0-or-later"],
+    "keywords": ["TYPO3 CMS"],
+    "require": {
+        "typo3/cms-core": "^13.4",
+        "typo3/cms-rte-ckeditor": "^13.4",
+        "typo3/cms-fluid-styled-content": "^13.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "HostEuropeGmbh\\HosteuropeTemplate\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "hosteurope_template"
+        }
+    }
+}

@@ -1,7 +1,7 @@
 <?php
 return [
     'BE' => [
-        'debug' => false,
+        'debug' => true,
         'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$ZSIGtIdwMSfpcmDfs/5Ezw$o0YSxcZuFcXYzQ7Pb9Afu89TinjtQZwlZbl4dOgcRcI',
         'passwordHashing' => [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
@@ -44,12 +44,19 @@ return [
         'cacheHash' => [
             'enforceValidation' => true,
         ],
-        'debug' => false,
+        'debug' => true,
         'disableNoCacheParameter' => true,
         'passwordHashing' => [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
             'options' => [],
         ],
+    ],
+    'GFX' => [
+        'processor' => 'ImageMagick',
+        'processor_colorspace' => '',
+        'processor_effects' => '',
+        'processor_enabled' => '1',
+        'processor_path' => '/usr/bin/',
     ],
     'LOG' => [
         'TYPO3' => [
@@ -58,7 +65,7 @@ return [
                     'writerConfiguration' => [
                         'notice' => [
                             'TYPO3\CMS\Core\Log\Writer\FileWriter' => [
-                                'disabled' => true,
+                                'disabled' => false,
                             ],
                         ],
                     ],
@@ -95,10 +102,10 @@ return [
                 ],
             ],
         ],
-        'devIPmask' => '',
-        'displayErrors' => 0,
+        'devIPmask' => '*',
+        'displayErrors' => 1,
         'encryptionKey' => 'd815ccc226e46eda999350fa9f744b262ac16703bd721dca93c4fa2bec6195f81946b7c8895c732923b82f9c65bd9e4a',
-        'exceptionalErrors' => 4096,
+        'exceptionalErrors' => 12290,
         'features' => [
             'extbase.consistentDateTimeHandling' => true,
             'frontend.cache.autoTagging' => true,
