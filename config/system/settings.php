@@ -54,7 +54,7 @@ return [
     'GFX' => [
         'processor' => 'ImageMagick',
         'processor_colorspace' => '',
-        'processor_effects' => '',
+        'processor_effects' => false,
         'processor_enabled' => '1',
         'processor_path' => '/usr/bin/',
     ],

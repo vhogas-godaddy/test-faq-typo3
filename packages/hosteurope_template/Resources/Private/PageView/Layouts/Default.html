@@ -1,21 +1,211 @@
-<ul>
-    <f:for each="{mainnavigation}" as="mainnavigationItem">
-        <li class="{f:if(condition: mainnavigationItem.active, then:'active')}">
-            <a href="{mainnavigationItem.link}" target="{mainnavigationItem.target}" title="{mainnavigationItem.title}">
-                {mainnavigationItem.title}
-            </a>
-            <f:if condition="{mainnavigationItem.children}">
-                <ul>
-                    <f:for each="{mainnavigationItem.children}" as="child">
-                        <li class="{f:if(condition: child.active, then:'active')}">
-                            <a href="{child.link}" target="{child.target}" title="{child.title}">
-                                {child.title}
-                            </a>
-                        </li>
-                    </f:for>
-                </ul>
-            </f:if>
-        </li>
-    </f:for>
-</ul>
+<header id="header"  class="full">
+    <div class="section-header">
+        <div class="row">
+            <div class="small-12 columns">
+                <div class="wrap">
+                    <div class="meta">
+                        <form class="search" method="get" action="suche/">
+                            <span class="submit lupe"></span>
+                            <input placeholder="Webseiten Suche" class="" type="text" name="q" value="">
+                            <input type="hidden" name="s" value=""/>
+                        </form>
+                        <nav class="meta-nav">
+                            <ul>
+                                <li><a href="/faq" title="FAQ">FAQ</a></li>
+                                <li><a href="/Host-Europe/Kontakt" title="Kontakt">Kontakt</a></li>
+                                <li><a href="https://www.hosteurope.de/blog" title="Blog">Blog</a></li>
+                                <li><a href="/Host-Europe/Kunden-Werben-Kunden" title="Kunden werben Kunden">Kunden werben Kunden</a></li>
+                            </ul>
+                        </nav>
+                        <div class="ui login floating right top pointing dropdown">
+                            <i>Login</i>
+                            <div class="menu">
+                                <div class="item">
+                                    <a href="https://kis.hosteurope.de/" target="_blank" title="KIS Login">KIS Login</a>
+                                </div>
+                                <div class="item"><a href="https://webmailer.hosteurope.de/" target="_blank" title="Webmailer Login">Webmailer Login</a></div>
+                                <div class="item"><a href="http://portal.office.com/" target="_blank" title="Office 365 Login">Office 365 Login</a></div>
+                                <div class="item"><a href="https://control.hosteurope.de/" target="_blank" title="ControlPanel">ControlPanel</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main clearfix">
+                        <a class="logo" href="/" title="Host Europe GmbH"></a>
+                        <nav class="mainnav">
+                            <ul>
+                                <li class="parent isTop">
+                                    <span>Webhosting</span>
+                                    <ul class="sub clearfix n_3er">
+                                        <li><a href="/Wordpress-Hosting" title="Erstellen Sie Ihre Website ganz einfach mit vorinstalliertem WordPress CMS auf unserem optimierten Hosting-System und erleben Sie maximale Performance."><strong>WordPress Hosting</strong> <span>Mit dem meistgenutzten Content Management System schnell und einfach ins Netz.</span></a></li>
+                                        <li><a href="/WebHosting" title="Beste Performance mit unserem All-in-One Hosting-Paket für Ihr Webprojekt: SSL und SiteLock kostenlos, kurze Ladezeiten, Datenbanken auf SSD und automatische Backups."><strong>WebHosting</strong> <span>Ihr kostengünstiger Einstieg: Komplettpakete für Ihren Webauftritt.</span></a></li>
+                                        <li><a href="/WebServer" title="Profitieren Sie von den Profi-Features des managed WebServer: SSL und SiteLock kostenlos, SSD, deutlich höheres PHP Memory Limit und verdoppelter Speicherplatz."><strong>WebServer</strong> <span>Ihr professionell administrierter virtueller Server für anspruchsvolle Web-Anwendungen.</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
+                                    <span>Server</span>
+                                    <ul class="sub clearfix n_3er">
+                                        <li><a href="/Server/Virtual-Server" title="Ultraschnelles virtuelles Hosting mit 100% SSD-Leistung, automatischen Backups, Plesk Onyx und SSL-Zertifikat für Sicherheit."><strong>Virtual Server</strong> <span>Mit 100% NVMe SSD-Power: Server-Hosting für Entwicklungsumgebungen und anspruchsvolle Web-Projekte.</span></a></li>
+                                        <li><a href="/server/advanced-services/" title="Dedizierte Linux Server mit Root-Rechten in Premium-Qualität: Ihre einfach einzurichtende Lösung, die sich perfekt an professionelle Anforderungen anpasst."><strong>Paid Advanced Services</strong> <span>Konzentrieren Sie sich auf ihr Kerngeschäft, indem Sie kosten- und ressourcenintensive Aufgaben an uns übergeben.</span></a></li>
+                                        <li><a href="/vps-advanced-services" title="Sichern Sie Leistung und Stabilität Ihrer Website, unabhängig vom Traffic-Umfang. Profitieren Sie von der vollen Kontrolle über Ihren Server."><strong>Fully Managed Virtual Server</strong> <span>Die gewohnte Performance gepaart mit umfangreicher Administration durch unseren Support.</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
+                                    <span>Domains</span>
+                                    <ul class="sub clearfix n_2er">
+                                        <li class="parent"><a href="/Domain-Namen" title="Prüfen Sie jetzt die Verfügbarkeit Ihres Wunschnamens mit unserem Domain-Check. Komfortable Verwaltung und Profi-Features inkl. Sparen Sie jetzt bis zu 93%."><strong>Domains</strong> <span>Finden Sie jetzt Ihre Wunsch-Domain. Zu günstigen Preisen, ohne versteckte Kosten.</span></a></li>
+                                        <li><a href="/SSL-Zertifikate" title="Treffen Sie mit SSL-Verschlüsselung eine professionelle Sicherheitsmaßnahme – erhöhen Sie das Vertrauen in Ihre Domain, Subdomains und Ihren Auftritt."><strong>SSL Zertifikate</strong> <span>Für verschlüsselten Datenaustausch, besseres Suchmaschinen-Ranking und Schutz vor Phishing-Websites.</span></a></li>
+                                        <li id="nav-domain-search" class="domain-search">
+                                            <strong>Finden Sie Ihren perfekten Domainnamen</strong>
+                                            <form action="/Domain-Search/">
+                                                <input type="hidden" name="nextorderstep" value="0">
+                                                <input type="text" placeholder="Geben Sie hier Ihre Wunsch-Domains ein" name="orderprocess_domains[]" class="domainname">
+                                                <button class="ui button">Domain Prüfen<i></i></button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
+                                    <span>SSL &amp; Security</span>
+                                    <ul class="sub clearfix n_2er">
+                                        <li><a href="/SSL-Zertifikate" title="Ein SSL-Zertifikat verschlüsselt die Datenübertragung in Ihrer digitalen Kommunikation und verhindert die „Nicht sicher“-Warnung von Google für Ihre Website."><strong>SSL-Zertifikate</strong> <span>Sorgen Sie für verschlüsselte Datenübertragung und schützen Sie sich und Ihre Besucher.</span></a></li>
+                                        <li><a href="/sucuri-website-malware-scanner" title="Schützen Sie Ihre Website und Ihre Besucher gegen Online-Gefahren: mit täglichen Scans. Bewahren Sie Ihre Website vor Google-Blacklisting."><strong>Sucuri Website Security</strong> <span>Täglicher Security Check und garantierte Malware-Entfernung. Schützt vor Hacker-Angriffen.</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
+                                    <span>E-Mail &amp; Office</span>
+                                    <ul class="sub clearfix n_2er">
+                                        <li><a href="/E-Mail-Hosting" title="Besser organisieren – mit effektiven E-Mail-Lösungen für Unternehmen, Existenzgründer, Vereine und private Nutzung. Anti-Spam-Filter, tägliches Backup."><strong>E-Mail</strong> <span>Die günstige E-Mail-Adresse zu Ihrer eigenen Domain – für Unternehmen, Existenzgründer, Vereine und privat.</span></a></li>
+                                        <li><a href="/Office-365" title="Steigern Sie Ihren Geschäftserfolg mit den Microsoft Office 2016 Tools Word, Excel, Powerpoint und Outlook, egal wo Sie gerade sind. "><strong>Microsoft 365</strong> <span>Erledigen Sie alles von überall: jederzeit Zugriff auf die neuesten Microsoft® Office Tools und Profi-E-Mail.</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
+                                    <span>Shop</span>
+                                    <ul class="sub clearfix n_2er">
+                                        <li><a href="/online-shop-erstellen" title="Hosting, E-Mail, SEO, Marketing-Tools: Unsere Baukästen enthalten alles, was Sie brauchen, um Ihre E-Commerce-Website zu erstellen und zu betreiben. "><strong>Online Shop</strong> <span>Erstellen Sie einfach und schnell Ihren Online-Shop.</span></a></li>
+                                        <li><a href="/wordpress-ecommerce" title="Gestalten Sie ganz einfach eine professionelle Website, responsive für Desktop, Tablet, Smartphone. Starten Sie online mit einem optimierten Auftritt."><strong>WordPress E-Commerce</strong> <span>Volle Flexibilität für Ihr erfolgreiches E-Commerce Business.</span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 <f:render section="Main" />
+<footer id="footer">
+    <div class="row">
+        <div class="small-12 columns">
+            <div class="inner">
+                <div class="main">
+                    <div class="row">
+                        <div data-equalizer="header">
+                            <div class="small-12 medium-4 large-2 columns" data-mh="col1">
+                                <div class="inside">
+                                    <h4 data-mh="header1" style="height: 20px;">Webhosting</h4>
+                                    <ul><li><a href="/WebHosting" title="WebHosting">WebHosting</a></li><li><a href="/WebServer" title="WebServer">WebServer</a></li><li><a href="/Wordpress-Hosting" title="Wordpress Hosting">Wordpress Hosting</a></li></ul>
+                                </div>
+                            </div>
+                            <div class="small-12 medium-4 large-2 columns" data-mh="col1">
+                                <div class="inside">
+                                    <h4 data-mh="header1" style="height: 20px;">Server</h4>
+                                    <ul>
+                                        <li><a href="/Server/Virtual-Server" title="Virtual Server">Virtual Server</a></li>
+                                        <li><a href="/server/advanced-services/" title="Paid Advanced Services">Paid Advanced Services</a></li>
+                                        <li><a href="/vps-advanced-services" title="Fully Managed Virtual Server">Fully Managed Virtual Server</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="small-12 medium-4 large-2 columns" data-mh="col1">
+                                <div class="inside">
+                                    <h4 data-mh="header1" style="height: 20px;">SSL &amp; Security</h4>
+                                    <ul>
+                                        <li><a href="/SSL-Zertifikate" title="SSL Zertifikate">SSL Zertifikate</a></li>
+                                        <li><a href="/sucuri-website-malware-scanner" title="Sucuri Website Security">Sucuri Website Security</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="small-12 medium-4 large-2 columns" data-mh="col1">
+                                <div class="inside">
+                                    <h4 data-mh="header1" style="height: 20px;">E-Mail &amp; Office</h4>
+                                    <ul>
+                                        <li><a href="/E-Mail-Hosting" title="E-Mail">E-Mail</a></li>
+                                        <li><a href="/Office-365" title="Office 365">Office 365</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="small-12 medium-4 large-2 columns" data-mh="col1">
+                                <div class="inside">
+                                    <h4 data-mh="header1" style="height: 20px;">Homepage &amp; Shop</h4>
+                                    <ul>
+                                        <li><a href="/online-shop-erstellen" title="Online Shop">Online Shop</a></li>
+                                        <li><a href="/wordpress-ecommerce" title="WordPress E-Commerce">WordPress E-Commerce</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="small-12 medium-4 large-2 columns" data-mh="col1">
+                                <div class="inside">
+                                    <h4 data-mh="header1" style="height: 20px;">Community</h4>
+                                    <ul>
+                                        <li><a href="/Host-Europe/Kunden-Werben-Kunden" title="Kunden werben Kunden">Kunden werben Kunden</a></li>
+                                        <li><a href="/Host-Europe/Experten" title="Experten">Experten</a></li><li><a href="/faq" title="FAQ">FAQ</a></li>
+                                        <li><a href="/Host-Europe/Kontakt" title="Kontakt">Kontakt</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="search">
+                        <div id="c557" class="frame frame-default frame-type-html frame-layout-0">
+                            <label>Domains suchen</label>
+                            <div class="inner">
+                                <input type="search" placeholder="Geben Sie hier Ihre Wunsch-Domain ein">
+                                <button type="submit" class="submit lupe">Prüfen</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="meta">
+                    <div class="row">
+                        <div class="small-12 columns">
+                            <a class="logo" href="/">
+                                <f:image src="EXT:hosteurope_template/Resources/Public/img/HostEurope_Logo-2x.png" alt="Host Europe GmbH Logo" />
+                            </a>
+                            <nav class="meta">
+                                <ul>
+                                    <li><a href="/Host-Europe/Unternehmen" title="Unternehmen">Unternehmen</a></li>
+                                    <li><a href="/Host-Europe/Sicherheit" title="Sicherheit">Sicherheit</a></li>
+                                    <li><a href="/Host-Europe/Verantwortung" title="Verantwortung">Verantwortung</a></li>
+                                    <li><a href="https://kis.hosteurope.de/public/contract-cancelation-request/" title="Jetzt kündigen">Jetzt kündigen</a></li>
+                                    <li><a href="/Host-Europe/Karriere" title="Karriere">Karriere</a></li>
+                                    <li><a href="/Host-Europe/Presse" title="Presse">Presse</a></li>
+                                    <li><a href="/Host-Europe/Partnerprogramme" title="Affiliate">Affiliate</a></li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <a href="/AGB" title="AGB">AGB</a></li>
+                                    <li><a href="/Widerrufsbelehrung" title="Widerrufsbelehrung">Widerrufsbelehrung</a></li>
+                                    <li><a href="/AGB/Datenschutzerklaerung" title="Datenschutzerklärung">Datenschutzerklärung</a></li>
+                                    <li><a href="/Impressum" title="Impressum">Impressum</a></li>
+                                    <li><a href="/Dokumente" title="Dokumente">Dokumente</a></li>
+                                    <li><a href="/Host-Europe/Kontakt" title="Kontakt">Kontakt</a></li>
+                                </ul>
+                            </nav>
+                            <nav class="socials">
+                                <div class="frame frame-default frame-type-html frame-layout-0">
+                                    <ul>
+                                        <li><a href="https://www.facebook.com/hosteurope" title="Host Europe @ facebook"><i class="fb"></i></a></li>
+                                        <li><a href="https://twitter.com/hosteurope" title="Host Europe @ twitter"><i class="tw"></i></a></li>
+                                        <li><a href="https://plus.google.com/+HostEurope/posts" title="Host Europe @ Google+"><i class="gp"></i></a></li>
+                                        <li><a href="https://www.hosteurope.de/blog/" title="Blog" target="_blank">Blog</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

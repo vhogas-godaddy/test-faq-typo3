@@ -4,7 +4,7 @@
 page = PAGE
 page {
     typeNum = 0
-    shortcutIcon = EXT:hosteurope_template/Resources/Public/Icons/favicon.ico
+    shortcutIcon = EXT:hosteurope_template/Resources/Public/icons/favicon.ico
 
     10 = PAGEVIEW
     10 {
@@ -38,12 +38,172 @@ page {
         }
     }
 
+    headerData {
+        100 = COA
+        100 {
+            10 = TEXT
+            10 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/favicon.ico
+                wrap = <link rel="shortcut icon" type="image/x-icon" href="|">
+            }
+            20 = TEXT
+            20 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/favicon.ico
+                wrap = <link rel="icon" type="image/x-icon" href="|">
+            }
+            30 = TEXT
+            30 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/favicon.gif
+                wrap = <link rel="icon" type="image/gif" href="|">
+            }
+            40 = TEXT
+            40 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/favicon.png
+                wrap = <link rel="icon" type="image/png" href="|">
+            }
+            50 = TEXT
+            50 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon.png
+                wrap = <link rel="apple-touch-icon" href="|">
+            }
+            60 = TEXT
+            60 {
+xx                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-57x57.png
+                wrap = <link rel="apple-touch-icon" href="|" sizes="57x57">
+            }
+            70 = TEXT
+            70 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-60x60.png
+                wrap = <link rel="apple-touch-icon" href="|" sizes="60x60">
+            }
+            80 = TEXT
+            80 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-72x72.png
+                wrap = <link rel="apple-touch-icon" href="|" sizes="72x72">
+            }
+            90 = TEXT
+            90 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-76x76.png
+                wrap = <link rel="apple-touch-icon" href="|" sizes="76x76">
+            }
+            100 = TEXT
+            100 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-114x114.png
+                wrap = <link rel="apple-touch-icon" href="|" sizes="114x114">
+            }
+            110 = TEXT
+            110 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-120x120.png
+                wrap = <link rel="apple-touch-icon" href="|" sizes="120x120">
+            }
+            120 = TEXT
+            120 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-128x128.png
+                wrap = <link rel="apple-touch-icon" href="|" sizes="128x128">
+            }
+            130 = TEXT
+            130 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-144x144.png
+                wrap = <link rel="apple-touch-icon" href="|" sizes="144x144">
+            }
+            140 = TEXT
+            140 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-152x152.png
+                wrap = <link rel="apple-touch-icon" href="|" sizes="152x152">
+            }
+            150 = TEXT
+            150 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-180x180.png
+                wrap = <link rel="apple-touch-icon" href="|" sizes="180x180">
+            }
+            160 = TEXT
+            160 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/apple-touch-icon-precomposed.png
+                wrap = <link rel="apple-touch-icon" href="|">
+            }
+            170 = TEXT
+            170 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/favicon-16x16.png
+                wrap = <link rel="icon" type="image/png" href="|" sizes="16x16">
+            }
+            180 = TEXT
+            180 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/favicon-32x32.png
+                wrap = <link rel="icon" type="image/png" href="|" sizes="32x32">
+            }
+            190 = TEXT
+            190 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/favicon-96x96.png
+                wrap = <link rel="icon" type="image/png" href="|" sizes="96x96">
+            }
+            200 = TEXT
+            200 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/favicon-160x160.png
+                wrap = <link rel="icon" type="image/png" href="|" sizes="160x160">
+            }
+            210 = TEXT
+            210 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/favicon-192x192.png
+                wrap = <link rel="icon" type="image/png" href="|" sizes="192x192">
+            }
+            220 = TEXT
+            220 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/favicon-196x196.png
+                wrap = <link rel="icon" type="image/png" href="|" sizes="196x196">
+            }
+            230 = TEXT
+            230 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/win8-tile-144x144.png
+                wrap = <meta name="msapplication-TileImage" content="|">
+            }
+            240 = TEXT
+            240.value = <meta name="msapplication-TileColor" content="#ffffff">
+            250 = TEXT
+            250.value = <meta name="msapplication-navbutton-color" content="#ffffff">
+            260 = TEXT
+            260 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/win8-tile-70x70.png
+                wrap = <meta name="msapplication-square70x70logo" content="|">
+            }
+            270 = TEXT
+            270 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/win8-tile-144x144.png
+                wrap = <meta name="msapplication-square144x144logo" content="|">
+            }
+            280 = TEXT
+            280 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/win8-tile-150x150.png
+                wrap = <meta name="msapplication-square150x150logo" content="|">
+            }
+            290 = TEXT
+            290 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/win8-tile-310x150.png
+                wrap = <meta name="msapplication-wide310x150logo" content="|">
+            }
+            300 = TEXT
+            300 {
+                data = path:EXT:hosteurope_template/Resources/Public/icons/win8-tile-310x310.png
+                wrap = <meta name="msapplication-square310x310logo" content="|">
+            }
+            310 = TEXT
+            310.value = <meta name="google-site-verification" content="DeoOhv_4oWcWpogRAEpGzt4aOYq646bvlzUlnFWanfU" />
+            320 = TEXT
+            320.value = <meta name="p:domain_verify" content="97ee4ded96cb1ef215c204fdb063a62e"/>
+        }
+        90 = TEXT
+        90.value(
+          <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+        )
+        91 = TEXT
+        91.value = <meta property="fb:pages" content="126000184100573" />
+    }
+
     includeCSSLibs {
 
     }
 
     includeCSS {
-        hosteurope_template_layout = EXT:hosteurope_template/Resources/Public/Css/layout.css
+        hosteurope_template_layout = EXT:hosteurope_template/Resources/Public/css/s.css
     }
 
     includeJSLibs {
@@ -59,6 +219,12 @@ page {
     }
 
     includeJSFooter {
-        hosteurope_template_scripts = EXT:hosteurope_template/Resources/Public/JavaScript/main.js
+        tags = https://tags.tiqcdn.com/utag/gpl/hosteurope/prod/utag.js
+        tags.async = 1
+        pm = https://sxb1pprd001.cloudstorage.secureserver.net/recomm-assets/privacy-manager-v4.0.js
+        pm.async = 1
+        pm.external = 1
+        pmInit = EXT:hosteurope_template/Resources/Public/js/pm.js?v=1
+        hosteurope_template_scripts = EXT:hosteurope_template/Resources/Public/js/h.js
     }
 }
