@@ -1,0 +1,24 @@
+<div class="outrail">
+	<div class="ui rail">
+		<div class="ui sticky">
+			<div class="sub-menu-wrapper">
+				<div class="current-title"></div>
+				<div class="close"></div>
+				<nav class="sub-menu">
+					<ul>
+						<f:for each="{root_categories}" as="root_category">
+							<li class="parent{f:if(condition:'{root_category.entity.uid} == {category.uid}',then:' isActive isOpen')} {f:if(condition:'{root_category.entity.uid} == {category.parent.uid}',then:'  isOpen')}">
+								<f:link.action action="router" arguments="{slug:root_category.entity.linkarguments}" title="{root_category.entity.headline}">{root_category.entity.headline}</f:link.action>
+								<ul>
+									<f:for each="{root_category.childs}" as="child_category">
+										<li class="{f:if(condition:'{child_category.uid} == {category.uid}',then:'isActive')}"><f:link.action action="router" arguments="{slug:child_category.linkarguments}" title="{child_category.headline}">{child_category.headline}</f:link.action></li>
+									</f:for>
+								</ul>
+							</li>
+						</f:for>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,69 @@
+<section class="stage section isSubStage">
+    <div class="wrap">
+        <div class="row">
+            <div class="small-12 medium-10 medium-offset-1 columns">
+                <div class="stage-content faq-stage">
+                    <h1>Webseite durchsuchen</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section faq-search white">
+    <div class="row text-center">
+        <div class="small-12 columns">
+            <div class="ui category search">
+                <div class="ui action input">
+                    <form method="get" id="tx_indexedsearch" action="{f:uri.page(pageUid:pid)}">
+                        <input placeholder="Webseite durchsuchen" class="tx-indexedsearch-searchbox-sword prompt" type="text" name="q" value="{q}">
+                        <input type="hidden" name="s" value="{s}"/>
+                        <button class="ui icon button">
+                            <span class="show-for-medium">Suche</span> <i></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="results"></div>
+            </div>
+            <f:if condition="{suggest_option}">
+                <div class="didyoumean">
+                    <div class="ui right pointing label big basic">
+                        Meinten Sie vielleicht
+                    </div>
+                    <a href="{f:uri.page(pageUid:pid)}?q={suggest_option}" title="Suche nach: {suggest_option}">{suggest_option}</a>
+                </div>
+            </f:if>
+        </div>
+    </div>
+</section>
+<div class="section grey">
+    <div class="row">
+        <div class="small-12 columns search-tabs">
+            <div class="ui pointing secondary menu">
+                <f:for each="{results}" as="result" iteration="iteration" key="key">
+                    <a class="item {f:if(condition:result.active,then:' active')}" data-tab="tab{key}">{result.name} ({result.total})</a>
+                </f:for>
+            </div>
+            <f:for each="{results}" as="result" iteration="iteration" key="key">
+                <div class="ui tab {f:if(condition:result.active,then:' active')}" data-tab="tab{key}">
+                    <div class="ui list large">
+                        <f:for each="{result.results}" as="entry" iteration="it2">
+                            <div class="item">
+                                <div class="header"><a href="{entry._source.s_url}" title="{entry._source.s_name}">{it2.cycle}. {entry._source.s_name}</a></div>
+                                <span class="path">{entry._source.s_subline}</span>
+                                <p>{entry._source.s_description->f:format.raw()}</p>
+                            </div>
+                        </f:for>
+                    </div>
+                </div>
+            </f:for>
+        </div>
+    </div>
+</div>
+<f:if condition="{showMarketingCookieInfo}">
+    <div class="customerInfo_support_cookie">
+        <div class="support_cookie_disable_inner">
+            <b>Support-Chat nicht sichtbar?</b>
+            <p>Der Support-Chat ist in Ihren Cookie Einstellungen deaktiviert. Klicken Sie <b><a href="https://www.hosteurope.de/AGB/Datenschutzerklaerung/">hier</a></b> und aktivieren Sie den Support-Chat.</p>
+        </div>
+    </div>
+</f:if>

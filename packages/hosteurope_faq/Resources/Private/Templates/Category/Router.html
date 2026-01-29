@@ -1,0 +1,45 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+{v:page.header.title(title: 'FAQ - Zu welchen Bereichen suchen Sie Antworten?', setIndexedDocTitle: 1)}
+<f:layout name="Default" />
+<f:section name="main">
+	<v:page.header.title title="FAQ - Zu welchen Bereichen suchen Sie Antworten?"/>
+	<v:page.header.title title="FAQ - Zu welchen Bereichen suchen Sie Antworten?" setIndexedDocTitle="1"/>
+	<v:page.header.meta property="og:title" content="FAQ - Zu welchen Bereichen suchen Sie Antworten?"/>
+	<v:page.header.meta name="DCTERMS.titl" content="FAQ - Zu welchen Bereichen suchen Sie Antworten?"/>
+	<v:page.header.meta name="description" content="Hier finden Sie unsere FAQ-Themen auf einen Blick. Klicken Sie auf einen Bereich und wählen Sie Ihr Antwort zu Ihrer Frage."/>
+	<v:page.header.meta name="DCTERMS.description" content="Hier finden Sie unsere FAQ-Themen auf einen Blick. Klicken Sie auf einen Bereich und wählen Sie Ihr Antwort zu Ihrer Frage."/>
+	<v:page.header.meta property="og:description" content="Hier finden Sie unsere FAQ-Themen auf einen Blick. Klicken Sie auf einen Bereich und wählen Sie Ihr Antwort zu Ihrer Frage."/>
+	<!--TYPO3SEARCH_end-->
+	<section class="section grey faq">
+		<div class="row text-center">
+			<div class="small-12 columns">
+				<h2>Themen auf einen Blick</h2>
+				<div class="faq-grid">
+					<div class="row small-up-2 medium-up-3 large-up-5">
+						<f:for each="{categories}" as="category">
+							<div class="column">
+								<f:link.action action="router" arguments="{slug:category.linkarguments}"  class="square">
+									<div class="inner-square">
+										<span>{category.headline}</span>
+									</div>
+								</f:link.action>
+							</div>
+						</f:for>
+
+						<f:for each="{questions}" as="category">
+							<div class="column">
+								<f:link.action action="router" arguments="{slug:category.linkarguments}"  class="square">
+									<div class="inner-square">
+										<span>{category.headline}</span>
+									</div>
+								</f:link.action>
+							</div>
+						</f:for>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--TYPO3SEARCH_begin-->
+</table>
+</f:section>

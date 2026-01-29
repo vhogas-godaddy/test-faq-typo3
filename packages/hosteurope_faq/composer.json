@@ -1,0 +1,21 @@
+{
+  "name": "host-europe/hosteurope-faq",
+  "type": "typo3-cms-extension",
+  "description": "TYPO3 FAQ for Host Europe GmbH",
+  "homepage": "https://www.hosteurope.de",
+  "license": ["GPL-2.0-or-later"],
+  "keywords": ["TYPO3 CMS"],
+  "require": {
+    "typo3/cms-core": "^13.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "HostEuropeGmbh\\HosteuropeFaq\\": "Classes/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "hosteurope_faq"
+    }
+  }
+}

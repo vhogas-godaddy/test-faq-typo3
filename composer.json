@@ -14,6 +14,8 @@
 		"sort-packages": true
 	},
 	"require": {
+		"fluidtypo3/vhs": "^7.2",
+		"host-europe/hosteurope-faq": "@dev",
 		"host-europe/hosteurope-template": "@dev",
 		"typo3/cms-backend": "^13.4",
 		"typo3/cms-belog": "^13.4",

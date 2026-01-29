@@ -1,0 +1,116 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+<f:layout name="Default"/>
+<f:section name="main">
+    <v:page.header.title title="{question.seotitle}"/>
+    <v:page.header.title title="{question.seotitle}" setIndexedDocTitle="1"/>
+    <v:page.header.meta property="og:title" content="{question.seotitle}"/>
+    <v:page.header.meta name="DCTERMS.title" content="{question.seotitle}"/>
+    <v:page.header.meta name="description" content="{question.seodescription}"/>
+    <v:page.header.meta name="DCTERMS.description" content="{question.seodescription}"/>
+    <v:page.header.meta property="og:description" content="{question.seodescription}"/>
+
+    <!--TYPO3SEARCH_end-->
+    <section class="section grey faq" data-call="{f:uri.page(pageUid:69,pageType:1007,absolute:1,additionalParams:{tx_hosteuropefaq_apiview:{q:question.uid}})}">
+        <div class="row">
+            <div class="small-12 large-3 columns">
+                <f:render partial="Category/Menu" arguments="{root_categories:root_categories,category:category}" />
+            </div>
+            <div class="small-12 large-9 columns">
+                <div class="faq-single-question">
+                    <h1 class="title">
+                        {question.headline->f:format.raw()}
+                    </h1>
+                    <div class="content">
+                        <!--TYPO3SEARCH_begin-->
+                        <f:format.raw><v:format.replace substring="faq-preview/#" replacement="#"  caseSensitive="0">{question.content->f:format.html()}</v:format.replace></f:format.raw>
+                        <!--TYPO3SEARCH_end-->
+                        <hr class="push-left">
+                        <f:if condition="{question.show_form}">
+                            <f:else>
+                                <div class="feedback push-left text-center">
+                                    <div class="feedback-question">
+                                        <h4>War dieser Artikel hilfreich für Sie?</h4>
+                                        <a class="ui secondary button" data-feedback-show="feedback-helpful" rel="nofollow" data-call="{f:uri.page(pageUid:69,pageType:1006,absolute:1,additionalParams:{tx_hosteuropefaq_apivote:{q:question.uid,v:1}})}">Ja</a>
+                                        <a class="ui secondary button" data-feedback-show="feedback-unhelpful" rel="nofollow" data-call="{f:uri.page(pageUid:69,pageType:1006,absolute:1,additionalParams:{tx_hosteuropefaq_apivote:{q:question.uid,v:0}})}">Nein</a>
+                                    </div>
+                                    <div class="feedback-helpful">
+                                        <h4>Vielen Dank für Ihr Feedback!</h4>
+                                    </div>
+                                    <div class="feedback-unhelpful">
+                                        <form class="feedback-form" action="{f:uri.page(pageUid:69,pageType:1008,absolute:1,additionalParams:{tx_hosteuropefaq_apisend:{q:question.uid}})}">
+                                            <div class="row">
+                                                <div class="small-12 large-8 large-centered columns">
+                                                    <div class="text-center">
+                                                        <span class="h2">Haben Sie noch Fragen? Kontaktieren Sie unseren Support über einen unserer Supportkanäle</span><br/>
+                                                        <span class="h2"><a href="https://www.hosteurope.de/Host-Europe/Kontakt" target="_blank">https://www.hosteurope.de/Host-Europe/Kontakt</a></span><br/>
+                                                        <span class="h3">Sie haben einen Fehler gefunden oder einen Verbesserungsvorschlag für den Artikel? Dann informieren Sie uns einfach über die Kommentarfunktion.</span><br/>
+                                                        <span class="h3">Bitte reichen Sie über dieses Formular keine Supportanfragen ein, da wir diese hier nicht bearbeiten können. Nutzen Sie für Supportanfragen bitte die Möglichkeit im KIS: <a target="_blank" href="https://kis.hosteurope.de/support/">https://kis.hosteurope.de/support/</a></span>
+                                                    </div>
+                                                    <div class="ui equal width form">
+                                                        <div class="fields">
+                                                            <div class="field">
+                                                                <input type="text" name="tx_hosteuropefaq_apisend[name]" placeholder="Name">
+                                                            </div>
+                                                            <div class="field">
+                                                                <input type="text" name="tx_hosteuropefaq_apisend[kundennummer]" placeholder="Ihre Kundennummer">
+                                                            </div>
+                                                        </div>
+                                                        <div class="field">
+                                                            <input type="email" required="required" name="tx_hosteuropefaq_apisend[email]" placeholder="E-Mail Adresse">
+                                                        </div>
+                                                        <div class="field">
+                                                            <textarea  name="tx_hosteuropefaq_apisend[kommentar]" placeholder="Ihr Kommentar"></textarea>
+                                                        </div>
+                                                        <script src='https://www.google.com/recaptcha/api.js'></script>
+                                                        <div class="field">
+                                                            <div class="g-recaptcha" data-sitekey="{recaptcha}"></div>
+                                                        </div>
+
+                                                        <div class="medium-text-left">
+                                                            <button type="submit" class="ui secondary button right ack">
+                                                                Kommentar absenden
+                                                            </button>
+                                                            <a class="ui secondary button nack">
+                                                                Abbrechen
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </f:else>
+                        </f:if>
+                        <f:if condition="{downloads->f:count()}">
+                            <f:render partial="Category/Downloads" arguments="{downloads:downloads}" />
+                        </f:if>
+                        <f:if condition="{question.relatedQuestions->f:count()}">
+                            <div class="cross-linking push-left">
+                                <p>
+                                    Diese Artikel könnten Sie auch interessieren:<br />
+                                    <f:for each="{question.relatedQuestions}" as="quest">
+                                        <f:link.action action="router" arguments="{slug:quest.linkarguments}" title="{quest.headline}">{quest.headline->f:format.raw()}</f:link.action>
+                                    </f:for>
+                                </p>
+                            </div>
+                        </f:if>
+                        <f:if condition="{category.crosssellingTeaser->f:count()}">
+                            <f:render partial="Category/Crossselling" arguments="{teaser_objects:category.crosssellingTeaser}" />
+                        </f:if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <f:if condition="{showMarketingCookieInfo}">
+        <div class="customerInfo_support_cookie">
+            <div class="support_cookie_disable_inner">
+                <b>Support-Chat nicht sichtbar?</b>
+                <p>Der Support-Chat ist in Ihren Cookie Einstellungen deaktiviert. Klicken Sie <b><a href="https://www.hosteurope.de/AGB/Datenschutzerklaerung/">hier</a></b> und aktivieren Sie den Support-Chat.</p>
+            </div>
+        </div>
+    </f:if>
+    <!--TYPO3SEARCH_begin-->
+</f:section>

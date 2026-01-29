@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  # Register all extension classes as services (excluding Domain Models - they are data objects)
+  HostEuropeGmbh\HosteuropeFaq\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
+
+  # Hooks and link builder are instantiated via GeneralUtility::makeInstance() from
+  # ext_localconf.php registrations and must be public for the container to inject dependencies
+  HostEuropeGmbh\HosteuropeFaq\Hooks\RecordLinkBuilder:
+    public: true
+
+  HostEuropeGmbh\HosteuropeFaq\Hooks\Hook:
+    public: true
+
+  HostEuropeGmbh\HosteuropeFaq\Hooks\Linkhandler:
+    public: true

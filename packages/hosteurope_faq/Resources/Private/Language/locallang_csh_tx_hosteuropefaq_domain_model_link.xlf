@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-05-19T12:54:40Z" product-name="hosteurope_faq">
+		<header/>
+		<body>
+			<trans-unit id="name.description">
+				<source>name</source>
+			</trans-unit>
+			<trans-unit id="link.description">
+				<source>link</source>
+			</trans-unit>
+			<trans-unit id="target.description">
+				<source>target</source>
+			</trans-unit>
+			<trans-unit id="relation.description">
+				<source>relation</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

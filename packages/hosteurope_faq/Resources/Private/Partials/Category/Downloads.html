@@ -1,0 +1,9 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+<div class="cross-linking downloads push-left">
+    <p>
+        Dateien:<br />
+        <f:for each="{downloads}" as="download">
+            <a href="{download.file.originalResource.publicUrl}" title="{download.name}" target="_blank">{download.name}</a>
+        </f:for>
+    </p>
+</div>

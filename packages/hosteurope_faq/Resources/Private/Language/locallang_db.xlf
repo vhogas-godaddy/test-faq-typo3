@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-05-19T12:54:40Z" product-name="hosteurope_faq">
+		<header/>
+		<body>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.headline">
+				<source>Thema</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.slug">
+				<source>Slug (URL Part)</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.subline">
+				<source>Themen Top Headline</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.content">
+				<source>Themen Beschreibung</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.parent">
+				<source>Überkategorie</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.show_form">
+				<source>Feedback Formular anzeigen?</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.show_vote">
+				<source>Bewertung zulassen?</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.alias">
+				<source>Alias (Eine pro Zeile!)</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.icon">
+				<source>Icon</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.seotitle">
+				<source>Seotitle</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.seodescription">
+				<source>Seodescription</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.downloads">
+				<source>Downloads</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.links">
+				<source>Links</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.related_categories">
+				<source>Related Categories</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_category.related_questions">
+				<source>Related Questions</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question">
+				<source>Fragen</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.headline">
+				<source>Frage</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.slug">
+				<source>Slug (URL Part)</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.content">
+				<source>Antwort</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.show_top">
+				<source>Top Frage</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.show_form">
+				<source>Feedback Formular ausblenden?</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.show_vote">
+				<source>Bewertung zulassen?</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.alias">
+				<source>Alias</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.seotitle">
+				<source>Seotitle</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.seodescription">
+				<source>Seodescription</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.downloads">
+				<source>Downloads</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.links">
+				<source>Links</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.categories">
+				<source>Categories</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.related_categories">
+				<source>Related Categories</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_question.related_questions">
+				<source>Related Questions</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_link">
+				<source>Link</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_link.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_link.link">
+				<source>Link</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_link.target">
+				<source>Target</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_link.relation">
+				<source>Relation</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_download">
+				<source>Download</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_download.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_download.file">
+				<source>File</source>
+			</trans-unit>
+			<trans-unit id="tx_hosteuropefaq_domain_model_download.content">
+				<source>Content</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

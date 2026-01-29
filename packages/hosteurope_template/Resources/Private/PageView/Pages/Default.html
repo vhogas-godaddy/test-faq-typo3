@@ -1,7 +1,9 @@
 <f:layout name="Default" />
 <f:section name="Main">
-
-    <f:render partial="Content" arguments="{records: content.main.records}"/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
+    <v:content.render column="1"/>
+    <main id="body" class="">
+        <!--TYPO3SEARCH_begin-->
+        <v:content.render column="0"/>
+        <!--TYPO3SEARCH_end-->
+    </main>
 </f:section>

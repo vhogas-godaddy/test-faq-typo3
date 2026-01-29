@@ -1,0 +1,60 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+<f:layout name="Default"/>
+<f:section name="main">
+    <f:if condition="{category.seotitle}">
+        <f:then>
+            <v:page.header.title title="{category.seotitle}"/>
+            <v:page.header.title title="{category.seotitle}" setIndexedDocTitle="1"/>
+            <v:page.header.meta property="og:title" content="{category.seotitle}"/>
+            <v:page.header.meta name="DCTERMS.title" content="{category.seotitle}"/>
+            <v:page.header.meta name="description" content="{category.seodescription}"/>
+            <v:page.header.meta name="DCTERMS.description" content="{category.seodescription}"/>
+            <v:page.header.meta property="og:description" content="{category.seodescription}"/>
+        </f:then>
+        <f:else>
+            <v:page.header.title title="Fragen zum Thema {category.headline}"/>
+            <v:page.header.title title="Fragen zum Thema {category.headline}" setIndexedDocTitle="1"/>
+            <v:page.header.meta property="og:title" content="Fragen zum Thema {category.headline}"/>
+            <v:page.header.meta name="DCTERMS.title" content="Fragen zum Thema {category.headline}"/>
+        </f:else>
+    </f:if>
+    <!--TYPO3SEARCH_end-->
+    <section class="section grey faq">
+        <div class="row">
+            <div class="small-12 large-3 columns">
+                <f:render partial="Category/Menu" arguments="{root_categories:root_categories,category:category}" />
+            </div>
+            <div class="small-12 large-9 columns">
+                <!--TYPO3SEARCH_begin-->
+                <h2>{category.subline}</h2>
+                <f:if condition="{category.subline}">
+                    <f:format.raw><v:format.replace substring="https://www.hosteurope.de/typo3/#" replacement="#"  caseSensitive="0"><v:format.replace substring="faq-preview/#" replacement="#"  caseSensitive="0">{category.content->f:format.html()}</v:format.replace></v:format.replace></f:format.raw>
+                </f:if>
+                <!--TYPO3SEARCH_end-->
+                <div class="ui accordion">
+                    <f:for each="{questions}" as="question">
+                        <div class="title">
+                            <i></i>
+                            <f:link.action action="router" arguments="{slug:question.linkarguments}" title="{question.headline}">{question.headline->f:format.raw()}</f:link.action>
+                        </div>
+                    </f:for>
+                </div>
+                <f:if condition="{downloads->f:count()}">
+                    <f:render partial="Category/Downloads" arguments="{downloads:downloads}" />
+                </f:if>
+                <f:if condition="{category.crosssellingTeaser->f:count()}">
+                    <f:render partial="Category/Crossselling" arguments="{teaser_objects:category.crosssellingTeaser}" />
+                </f:if>
+            </div>
+        </div>
+    </section>
+    <f:if condition="{showMarketingCookieInfo}">
+        <div class="customerInfo_support_cookie">
+            <div class="support_cookie_disable_inner">
+                <b>Support-Chat nicht sichtbar?</b>
+                <p>Der Support-Chat ist in Ihren Cookie Einstellungen deaktiviert. Klicken Sie <b><a href="https://www.hosteurope.de/AGB/Datenschutzerklaerung/">hier</a></b> und aktivieren Sie den Support-Chat.</p>
+            </div>
+        </div>
+    </f:if>
+    <!--TYPO3SEARCH_begin-->
+</f:section>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-05-19T12:54:40Z" product-name="hosteurope_faq">
+		<header/>
+		<body>
+			<trans-unit id="headline.description">
+				<source>headline</source>
+			</trans-unit>
+			<trans-unit id="subline.description">
+				<source>subline</source>
+			</trans-unit>
+			<trans-unit id="content.description">
+				<source>content</source>
+			</trans-unit>
+			<trans-unit id="parent.description">
+				<source>parent</source>
+			</trans-unit>
+			<trans-unit id="show_form.description">
+				<source>showForm</source>
+			</trans-unit>
+			<trans-unit id="show_vote.description">
+				<source>showVote</source>
+			</trans-unit>
+			<trans-unit id="alias.description">
+				<source>alias</source>
+			</trans-unit>
+			<trans-unit id="icon.description">
+				<source>icon</source>
+			</trans-unit>
+			<trans-unit id="seotitle.description">
+				<source>seotitle</source>
+			</trans-unit>
+			<trans-unit id="seodescription.description">
+				<source>seodescription</source>
+			</trans-unit>
+			<trans-unit id="downloads.description">
+				<source>downloads</source>
+			</trans-unit>
+			<trans-unit id="links.description">
+				<source>links</source>
+			</trans-unit>
+			<trans-unit id="related_categories.description">
+				<source>relatedCategories</source>
+			</trans-unit>
+			<trans-unit id="related_questions.description">
+				<source>relatedQuestions</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
