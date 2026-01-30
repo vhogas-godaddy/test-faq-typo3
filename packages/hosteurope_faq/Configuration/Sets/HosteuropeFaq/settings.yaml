@@ -1,0 +1,6 @@
+plugin:
+  tx_hosteuropefaq_main:
+    view:
+      templateRootPath: 'EXT:hosteurope_faq/Resources/Private/Templates/'
+      partialRootPath: 'EXT:hosteurope_faq/Resources/Private/Partials/'
+      layoutRootPath: 'EXT:hosteurope_faq/Resources/Private/Layouts/'

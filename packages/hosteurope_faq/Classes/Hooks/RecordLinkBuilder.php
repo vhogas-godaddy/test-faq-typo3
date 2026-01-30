@@ -1,6 +1,7 @@
 <?php
 namespace HostEuropeGmbh\HosteuropeFaq\Hooks;
 
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Service\TypoLinkCodecService;
@@ -15,10 +16,13 @@ class RecordLinkBuilder extends AbstractTypolinkBuilder
      */
     public function build(array &$linkDetails, string $linkText, string $target, array $conf): LinkResultInterface
     {
+        die();
         $tsfe = $this->getTypoScriptFrontendController();
-        $pageTsConfig = $tsfe->getPagesTSconfig();
+        $pageTsConfig = BackendUtility::getPagesTSconfig($tsfe->id);
         $configurationKey = $linkDetails['identifier'] . '.';
-        $configuration = $tsfe->tmpl->setup['config.']['recordLinks.'];
+        $frontendTypoScript = $this->contentObjectRenderer->getRequest()->getAttribute('frontend.typoscript');
+        $typoScriptSetup = $frontendTypoScript->getSetupArray();
+        $configuration = $typoScriptSetup['config.']['recordLinks.'] ?? [];
         $linkHandlerConfiguration = $pageTsConfig['TCEMAIN.']['linkHandler.'];
 
         if (!isset($configuration[$configurationKey], $linkHandlerConfiguration[$configurationKey])) {
@@ -33,7 +37,7 @@ class RecordLinkBuilder extends AbstractTypolinkBuilder
         $typoScriptConfiguration = $configuration[$configurationKey]['typolink.'];
         $linkHandlerConfiguration = $linkHandlerConfiguration[$configurationKey]['configuration.'];
 
-        if ($configuration[$configurationKey]['forceLink']) {
+        if (!empty($configuration[$configurationKey]['forceLink'])) {
             $record = $tsfe->sys_page->getRawRecord($linkHandlerConfiguration['table'], $linkDetails['uid']);
         } else {
             $record = $tsfe->sys_page->checkRecord($linkHandlerConfiguration['table'], $linkDetails['uid']);
@@ -49,8 +53,7 @@ class RecordLinkBuilder extends AbstractTypolinkBuilder
 
 
         if($linkDetails['identifier'] == "tx_hosteuropefaq_category"){
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-            $categoryRepository = $objectManager->get('HostEuropeGmbh\\HosteuropeFaq\\Domain\\Repository\\CategoryRepository');
+            $categoryRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository::class);
             $entity = $categoryRepository->findByUid($linkDetails['uid']);
 
             // tx_hosteuropefaq_main[slug][0]={field:slug}&tx_hosteuropefaq_main[controller]=Category&tx_hosteuropefaq_main[action]=router
@@ -62,8 +65,7 @@ class RecordLinkBuilder extends AbstractTypolinkBuilder
             $typoScriptConfiguration['additionalParams'] = "&".urldecode(http_build_query($link_array));
 
         }elseif($linkDetails['identifier'] == "tx_hosteuropefaq_question"){
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-            $questionRepository = $objectManager->get('HostEuropeGmbh\\HosteuropeFaq\\Domain\\Repository\\QuestionRepository');
+            $questionRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\QuestionRepository::class);
             $entity = $questionRepository->findByUid($linkDetails['uid']);
 
             // tx_hosteuropefaq_main[slug][0]={field:slug}&tx_hosteuropefaq_main[controller]=Category&tx_hosteuropefaq_main[action]=router
@@ -77,17 +79,14 @@ class RecordLinkBuilder extends AbstractTypolinkBuilder
         }
         unset($typoScriptConfiguration['additionalParams.']);
 
-        $typoScriptConfiguration['target'] = $target ?: $this->resolveTargetAttribute($conf, 'extTarget', true, $this->getTypoScriptFrontendController()->extTarget);
+        $extTarget = $typoScriptSetup['config.']['extTarget'] ?? '';
+        $typoScriptConfiguration['target'] = $target ?: $this->resolveTargetAttribute($conf, 'extTarget', true, $extTarget);
 
         // Build the full link to the record
         $localContentObjectRenderer = GeneralUtility::makeInstance(ContentObjectRenderer::class);
         $localContentObjectRenderer->start($record, $linkHandlerConfiguration['table']);
         $localContentObjectRenderer->parameters = $this->contentObjectRenderer->parameters;
         $link = $localContentObjectRenderer->typoLink($linkText, $typoScriptConfiguration);
-
-        $this->contentObjectRenderer->lastTypoLinkLD = $localContentObjectRenderer->lastTypoLinkLD;
-        $this->contentObjectRenderer->lastTypoLinkUrl = $localContentObjectRenderer->lastTypoLinkUrl;
-        $this->contentObjectRenderer->lastTypoLinkTarget = $localContentObjectRenderer->lastTypoLinkTarget;
 
         // nasty workaround so typolink stops putting a link together, there is a link already built
         throw new UnableToLinkException(

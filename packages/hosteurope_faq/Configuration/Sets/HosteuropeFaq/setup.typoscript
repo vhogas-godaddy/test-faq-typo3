@@ -1,0 +1,25 @@
+plugin.tx_hosteuropefaq {
+    view {
+        templateRootPaths {
+            0 = EXT:hosteurope_faq/Resources/Private/Templates/
+            10 = {$plugin.tx_hosteuropefaq_main.view.templateRootPath}
+        }
+
+        partialRootPaths {
+            0 = EXT:hosteurope_faq/Resources/Private/Partials/
+            10 = {$plugin.tx_hosteuropefaq_main.view.partialRootPath}
+        }
+
+        layoutRootPaths {
+            0 = EXT:hosteurope_faq/Resources/Private/Layouts/
+            10 = {$plugin.tx_hosteuropefaq_main.view.layoutRootPath}
+        }
+    }
+}
+
+plugin.tx_hosteuropefaq_main < plugin.tx_hosteuropefaq
+plugin.tx_hosteuropefaq_apiview < plugin.tx_hosteuropefaq
+plugin.tx_hosteuropefaq_apivote < plugin.tx_hosteuropefaq
+plugin.tx_hosteuropefaq_apisend < plugin.tx_hosteuropefaq
+plugin.tx_hosteuropefaq_search < plugin.tx_hosteuropefaq
+plugin.tx_hosteuropefaq_suggest < plugin.tx_hosteuropefaq

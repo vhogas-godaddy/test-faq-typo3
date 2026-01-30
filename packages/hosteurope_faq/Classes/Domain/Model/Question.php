@@ -138,17 +138,10 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $seodescription = '';
     
     /**
-     * downloads
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download>
-     */
-    protected $downloads = null;
-    
-    /**
      * links
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Link>
-     * @cascade remove
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $links = null;
     
@@ -192,7 +185,6 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->downloads = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->links = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->relatedCategories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -381,49 +373,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->seodescription = $seodescription;
     }
-    
-    /**
-     * Adds a Download
-     *
-     * @param \HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download $download
-     * @return void
-     */
-    public function addDownload(\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download $download)
-    {
-        $this->downloads->attach($download);
-    }
-    
-    /**
-     * Removes a Download
-     *
-     * @param \HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download $downloadToRemove The Download to be removed
-     * @return void
-     */
-    public function removeDownload(\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download $downloadToRemove)
-    {
-        $this->downloads->detach($downloadToRemove);
-    }
-    
-    /**
-     * Returns the downloads
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download> $downloads
-     */
-    public function getDownloads()
-    {
-        return $this->downloads;
-    }
-    
-    /**
-     * Sets the downloads
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download> $downloads
-     * @return void
-     */
-    public function setDownloads(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $downloads)
-    {
-        $this->downloads = $downloads;
-    }
+
     
     /**
      * Adds a Category
@@ -616,11 +566,10 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getLinkarguments() {
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         /**
          * @var \HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository $categoryRepository
          */
-        $categoryRepository = $objectManager->get('HostEuropeGmbh\\HosteuropeFaq\\Domain\\Repository\\CategoryRepository');
+        $categoryRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository::class);
         $category = $categoryRepository->findOneByPid($this->getPid());
 
         if($category){
@@ -639,12 +588,10 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 	 */
 	public function getParentCategories() {
 
-
-		$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 		/**
 		 * @var \HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository $categoryRepository
 		 */
-		$categoryRepository = $objectManager->get('HostEuropeGmbh\\HosteuropeFaq\\Domain\\Repository\\CategoryRepository');
+		$categoryRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository::class);
 		$category = $categoryRepository->findOneByPid($this->getPid());
 
 		if($category){

@@ -36,9 +36,13 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * questionRepository
      *
      * @var \HostEuropeGmbh\HosteuropeFaq\Domain\Repository\QuestionRepository
-     * @inject
      */
     protected $questionRepository = NULL;
+
+    public function __construct()
+    {
+        $this->questionRepository = GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\QuestionRepository::class);
+    }
     
     /**
      * action list

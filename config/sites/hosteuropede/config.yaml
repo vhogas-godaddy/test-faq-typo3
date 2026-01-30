@@ -1,6 +1,7 @@
 base: /
 dependencies:
   - host-europe/hosteurope-template
+  - host-europe/hosteurope-faq
   - typo3/fluid-styled-content
 languages:
   -
@@ -27,3 +28,53 @@ languages:
     languageId: 1
 rootPageId: 1
 websiteTitle: ''
+settings:
+  excludedParameters:
+    - 'tx_hosteuropefaq_main[action]'
+    - 'tx_hosteuropefaq_main[controller]'
+    - 'tx_hosteuropefaq_main[slug]'
+routeEnhancers:
+  FaqMain:
+    type: Extbase
+    limitToPages:
+      - 69
+    extension: HosteuropeFaq
+    plugin: Main
+    routes:
+      - routePath: '/{slug_0}'
+        _controller: 'Category::router'
+        _arguments:
+          slug_0: 'slug/0'
+      - routePath: '/{slug_0}/{slug_1}'
+        _controller: 'Category::router'
+        _arguments:
+          slug_0: 'slug/0'
+          slug_1: 'slug/1'
+      - routePath: '/{slug_0}/{slug_1}/{slug_2}'
+        _controller: 'Category::router'
+        _arguments:
+          slug_0: 'slug/0'
+          slug_1: 'slug/1'
+          slug_2: 'slug/2'
+      - routePath: '/{slug_0}/{slug_1}/{slug_2}/{slug_3}'
+        _controller: 'Category::router'
+        _arguments:
+          slug_0: 'slug/0'
+          slug_1: 'slug/1'
+          slug_2: 'slug/2'
+          slug_3: 'slug/3'
+      - routePath: '/{slug_0}/{slug_1}/{slug_2}/{slug_3}/{slug_4}'
+        _controller: 'Category::router'
+        _arguments:
+          slug_0: 'slug/0'
+          slug_1: 'slug/1'
+          slug_2: 'slug/2'
+          slug_3: 'slug/3'
+          slug_4: 'slug/4'
+    defaultController: 'Category::router'
+    requirements:
+      slug_0: '[a-zA-Z0-9\-_]+'
+      slug_1: '[a-zA-Z0-9\-_]+'
+      slug_2: '[a-zA-Z0-9\-_]+'
+      slug_3: '[a-zA-Z0-9\-_]+'
+      slug_4: '[a-zA-Z0-9\-_]+'

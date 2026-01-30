@@ -15,7 +15,24 @@ TCEFORM {
     }
 }
 
-TCEMAIN {
-
+TCEMAIN.linkHandler {
+    tx_hosteuropefaq_category {
+        handler = TYPO3\CMS\Backend\LinkHandler\RecordLinkHandler
+        label = FAQ-Category
+        displayAfter = page
+        scanAfter = page
+        configuration {
+            table = tx_hosteuropefaq_domain_model_category
+        }
+    }
+    tx_hosteuropefaq_question {
+        handler = TYPO3\CMS\Backend\LinkHandler\RecordLinkHandler
+        label = FAQ-Question
+        displayAfter = page
+        scanAfter = page
+        configuration {
+            table = tx_hosteuropefaq_domain_model_question
+        }
+    }
 }
 

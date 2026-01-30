@@ -1,7 +1,7 @@
 <?php
 defined('TYPO3') or die('Access denied.');
 
-$extensionName = 'HostEuropeGmbh.HosteuropeFaq';
+$extensionName = 'HosteuropeFaq';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$extensionName,

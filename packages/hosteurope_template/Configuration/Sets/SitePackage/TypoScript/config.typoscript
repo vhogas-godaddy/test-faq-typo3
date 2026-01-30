@@ -34,3 +34,21 @@ config {
     concatenateJs = 0
     concatenateCss = 0
 }
+
+config.recordLinks.tx_hosteuropefaq_question {
+    typolink {
+        parameter = 69
+        useCacheHash = 1
+        additionalParams.data = field:slug
+        additionalParams.wrap = &tx_hosteuropefaq_main[slug][0]=|
+    }
+}
+
+config.recordLinks.tx_hosteuropefaq_category {
+    typolink {
+        parameter = 69
+        useCacheHash = 1
+        additionalParams.data = field:slug
+        additionalParams.wrap = &tx_hosteuropefaq_main[slug][0]=|
+    }
+}

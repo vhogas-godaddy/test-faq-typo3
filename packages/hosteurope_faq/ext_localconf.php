@@ -4,8 +4,9 @@ defined('TYPO3') or die('Access denied.');
 use \HostEuropeGmbh\HosteuropeFaq\Controller\CategoryController;
 use \HostEuropeGmbh\HosteuropeFaq\Controller\QuestionController;
 use \HostEuropeGmbh\HosteuropeFaq\Controller\SearchController;
+use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-$extensionName = 'HostEuropeGmbh.HosteuropeFaq';
+$extensionName = 'HosteuropeFaq';
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	$extensionName,

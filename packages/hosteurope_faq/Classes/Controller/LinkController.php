@@ -36,9 +36,13 @@ class LinkController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * linkRepository
      *
      * @var \HostEuropeGmbh\HosteuropeFaq\Domain\Repository\LinkRepository
-     * @inject
      */
     protected $linkRepository = NULL;
+
+    public function __construct()
+    {
+        $this->linkRepository = GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\LinkRepository::class);
+    }   
     
     /**
      * action list

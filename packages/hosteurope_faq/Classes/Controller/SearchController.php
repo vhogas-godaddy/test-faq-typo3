@@ -28,7 +28,6 @@ namespace HostEuropeGmbh\HosteuropeFaq\Controller;
 use HostEuropeGmbh\HosteuropeFaq\Domain\Model\Question;
 use HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resources\Content;
 use TYPO3\CMS\Core\Page\PageRenderer;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -51,6 +50,12 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * @inject
 	 */
 	protected $questionRepository = null;
+
+	public function __construct()
+    {
+        $this->categoryRepository = GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository::class);
+        $this->questionRepository = GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\QuestionRepository::class);
+    }
 
 
 	protected function _search( $query, $s = null ) {
@@ -367,9 +372,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         /**
          * Marketing cookie - show info to customer to activate support
          */
-        $baseUrl = '../' . ExtensionManagementUtility::siteRelPath('hosteurope_template');
-
-        $pageRenderer->addCssFile($baseUrl . 'Resources/Public/css/extra.css');
+        $pageRenderer->addCssFile('EXT:hosteurope_template/Resources/Public/css/extra.css');
 
         if (isset($_COOKIE['OPTOUTMULTI']) && ! empty($_COOKIE['OPTOUTMULTI'])) {
             $cookieValue = $_COOKIE['OPTOUTMULTI'];

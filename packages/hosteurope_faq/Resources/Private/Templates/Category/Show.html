@@ -39,12 +39,6 @@
                         </div>
                     </f:for>
                 </div>
-                <f:if condition="{downloads->f:count()}">
-                    <f:render partial="Category/Downloads" arguments="{downloads:downloads}" />
-                </f:if>
-                <f:if condition="{category.crosssellingTeaser->f:count()}">
-                    <f:render partial="Category/Crossselling" arguments="{teaser_objects:category.crosssellingTeaser}" />
-                </f:if>
             </div>
         </div>
     </section>

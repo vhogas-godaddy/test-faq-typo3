@@ -110,17 +110,10 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $seodescription = '';
     
     /**
-     * downloads
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download>
-     */
-    protected $downloads = null;
-    
-    /**
      * links
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Link>
-     * @cascade remove
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $links = null;
     
@@ -137,13 +130,6 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Question>
      */
     protected $relatedQuestions = null;
-
-    /**
-     * crosssellingTeaser
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeCrossselling\Domain\Model\Teaser>
-     */
-    protected $crosssellingTeaser = null;
     
     /**
      * __construct
@@ -164,11 +150,9 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->downloads = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->links = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->relatedCategories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->relatedQuestions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->crosssellingTeaser = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
     
     /**
@@ -392,49 +376,6 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
     
     /**
-     * Adds a Download
-     *
-     * @param \HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download $download
-     * @return void
-     */
-    public function addDownload(\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download $download)
-    {
-        $this->downloads->attach($download);
-    }
-    
-    /**
-     * Removes a Download
-     *
-     * @param \HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download $downloadToRemove The Download to be removed
-     * @return void
-     */
-    public function removeDownload(\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download $downloadToRemove)
-    {
-        $this->downloads->detach($downloadToRemove);
-    }
-    
-    /**
-     * Returns the downloads
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download> $downloads
-     */
-    public function getDownloads()
-    {
-        return $this->downloads;
-    }
-    
-    /**
-     * Sets the downloads
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Download> $downloads
-     * @return void
-     */
-    public function setDownloads(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $downloads)
-    {
-        $this->downloads = $downloads;
-    }
-    
-    /**
      * Adds a Category
      *
      * @param \HostEuropeGmbh\HosteuropeFaq\Domain\Model\Category $relatedCategory
@@ -518,51 +459,6 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setRelatedQuestions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedQuestions)
     {
         $this->relatedQuestions = $relatedQuestions;
-    }
-
-
-
-    /**
-     * Adds a Question
-     *
-     * @param \HostEuropeGmbh\HosteuropeCrossselling\Domain\Model\Teaser $crosssellingTeaser
-     * @return void
-     */
-    public function addCrosssellingTeaser(\HostEuropeGmbh\HosteuropeCrossselling\Domain\Model\Teaser $crosssellingTeaser)
-    {
-        $this->crosssellingTeaser->attach($crosssellingTeaser);
-    }
-
-    /**
-     * Removes a crosssellingTeaser
-     *
-     * @param \HostEuropeGmbh\HosteuropeCrossselling\Domain\Model\Teaser $crosssellingTeaser The Question to be removed
-     * @return void
-     */
-    public function removeCrosssellingTeaser(\HostEuropeGmbh\HosteuropeCrossselling\Domain\Model\Teaser $crosssellingTeaser)
-    {
-        $this->crosssellingTeaser->detach($crosssellingTeaser);
-    }
-
-    /**
-     * Returns the crosssellingTeaser
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeCrossselling\Domain\Model\Teaser> $crosssellingTeaser
-     */
-    public function getCrosssellingTeaser()
-    {
-        return $this->crosssellingTeaser;
-    }
-
-    /**
-     * Sets the crosssellingTeaser
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeCrossselling\Domain\Model\Teaser> $crosssellingTeaser
-     * @return void
-     */
-    public function setCrosssellingTeaser(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $crosssellingTeaser)
-    {
-        $this->crosssellingTeaser = $crosssellingTeaser;
     }
     
     /**

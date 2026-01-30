@@ -20,12 +20,12 @@ class Linkhandler implements ProcessLinkParametersInterface {
 	 * @return void
 	 */
 	public function process($linkHandler){
+		die();
 		$link_config = $linkHandler->getTypolinkConfiguration();
 		$configurationKey = ($linkHandler->getConfigurationKey());
 
 		if($configurationKey == "tx_hosteuropefaq_category."){
-			$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-			$categoryRepository = $objectManager->get('HostEuropeGmbh\\HosteuropeFaq\\Domain\\Repository\\CategoryRepository');
+			$categoryRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository::class);
 			$entity = $categoryRepository->findByUid($linkHandler->getUid());
 
 			// tx_hosteuropefaq_main[slug][0]={field:slug}&tx_hosteuropefaq_main[controller]=Category&tx_hosteuropefaq_main[action]=router
@@ -38,8 +38,7 @@ class Linkhandler implements ProcessLinkParametersInterface {
 
 			$linkHandler->setTypolinkConfiguration($link_config);
 		}elseif($configurationKey == "tx_hosteuropefaq_question."){
-			$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-			$questionRepository = $objectManager->get('HostEuropeGmbh\\HosteuropeFaq\\Domain\\Repository\\QuestionRepository');
+			$questionRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\QuestionRepository::class);
 			$entity = $questionRepository->findByUid($linkHandler->getUid());
 
 			// tx_hosteuropefaq_main[slug][0]={field:slug}&tx_hosteuropefaq_main[controller]=Category&tx_hosteuropefaq_main[action]=router
