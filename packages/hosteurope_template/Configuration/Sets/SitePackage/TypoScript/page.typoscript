@@ -38,6 +38,14 @@ page {
         }
     }
 
+    headTag {
+        20 = TEXT
+        20.value = <base href="/">
+    }
+
+    headTag.append = TEXT
+    headTag.append.value = <base href="/">
+
     headerData {
         100 = COA
         100 {

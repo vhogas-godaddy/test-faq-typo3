@@ -1,4 +1,5 @@
 <?php
+
 namespace HostEuropeGmbh\HosteuropeFaq\Domain\Repository;
 
 /***************************************************************
@@ -41,7 +42,8 @@ class QuestionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
 
     // Example for repository wide settings
-    public function initializeObject() {
+    public function initializeObject()
+    {
         $querySettings = $this->createQuery()->getQuerySettings();
 
         // don't add the pid constraint
@@ -49,12 +51,13 @@ class QuestionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $this->setDefaultQuerySettings($querySettings);
     }
 
-    public function findTop($pids){
+    public function findTop($pids)
+    {
         $query = $this->createQuery();
         $query->matching(
             $query->logicalAnd(
-              //  $query->equals('showTop',1),
-                $query->in('pid',$pids)
+            //  $query->equals('showTop',1),
+                $query->in('pid', $pids)
             )
         );
 

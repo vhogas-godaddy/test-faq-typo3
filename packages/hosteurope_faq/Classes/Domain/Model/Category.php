@@ -1,4 +1,5 @@
 <?php
+
 namespace HostEuropeGmbh\HosteuropeFaq\Domain\Model;
 
 /***************************************************************
@@ -45,70 +46,70 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $slug = '';
-    
+
     /**
      * subline
      *
      * @var string
      */
     protected $subline = '';
-    
+
     /**
      * content
      *
      * @var string
      */
     protected $content = '';
-    
+
     /**
      * parent
      *
      * @var \HostEuropeGmbh\HosteuropeFaq\Domain\Model\Category
      */
     protected $parent = null;
-    
+
     /**
      * showForm
      *
      * @var bool
      */
     protected $showForm = false;
-    
+
     /**
      * showVote
      *
      * @var string
      */
     protected $showVote = '';
-    
+
     /**
      * alias
      *
      * @var string
      */
     protected $alias = '';
-    
+
     /**
      * icon
      *
      * @var string
      */
     protected $icon = '';
-    
+
     /**
      * seotitle
      *
      * @var string
      */
     protected $seotitle = '';
-    
+
     /**
      * seodescription
      *
      * @var string
      */
     protected $seodescription = '';
-    
+
     /**
      * links
      *
@@ -116,21 +117,21 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $links = null;
-    
+
     /**
      * relatedCategories
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Category>
      */
     protected $relatedCategories = null;
-    
+
     /**
      * relatedQuestions
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Question>
      */
     protected $relatedQuestions = null;
-    
+
     /**
      * __construct
      */
@@ -139,7 +140,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
-    
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
@@ -154,7 +155,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->relatedCategories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->relatedQuestions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
-    
+
     /**
      * Returns the headline
      *
@@ -164,7 +165,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->headline;
     }
-    
+
     /**
      * Sets the headline
      *
@@ -175,7 +176,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->headline = $headline;
     }
-    
+
     /**
      * Returns the subline
      *
@@ -185,7 +186,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->subline;
     }
-    
+
     /**
      * Sets the subline
      *
@@ -196,7 +197,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->subline = $subline;
     }
-    
+
     /**
      * Returns the content
      *
@@ -206,7 +207,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->content;
     }
-    
+
     /**
      * Sets the content
      *
@@ -217,7 +218,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->content = $content;
     }
-    
+
     /**
      * Returns the parent
      *
@@ -227,7 +228,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->parent;
     }
-    
+
     /**
      * Sets the parent
      *
@@ -238,7 +239,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->parent = $parent;
     }
-    
+
     /**
      * Returns the showForm
      *
@@ -248,7 +249,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->showForm;
     }
-    
+
     /**
      * Sets the showForm
      *
@@ -259,7 +260,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->showForm = $showForm;
     }
-    
+
     /**
      * Returns the boolean state of showForm
      *
@@ -269,7 +270,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->showForm;
     }
-    
+
     /**
      * Returns the showVote
      *
@@ -279,7 +280,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->showVote;
     }
-    
+
     /**
      * Sets the showVote
      *
@@ -290,7 +291,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->showVote = $showVote;
     }
-    
+
     /**
      * Returns the alias
      *
@@ -300,7 +301,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->alias;
     }
-    
+
     /**
      * Sets the alias
      *
@@ -311,7 +312,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->alias = $alias;
     }
-    
+
     /**
      * Returns the icon
      *
@@ -321,7 +322,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->icon;
     }
-    
+
     /**
      * Sets the icon
      *
@@ -332,7 +333,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->icon = $icon;
     }
-    
+
     /**
      * Returns the seotitle
      *
@@ -342,7 +343,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->seotitle;
     }
-    
+
     /**
      * Sets the seotitle
      *
@@ -353,7 +354,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->seotitle = $seotitle;
     }
-    
+
     /**
      * Returns the seodescription
      *
@@ -363,7 +364,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->seodescription;
     }
-    
+
     /**
      * Sets the seodescription
      *
@@ -374,7 +375,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->seodescription = $seodescription;
     }
-    
+
     /**
      * Adds a Category
      *
@@ -385,7 +386,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedCategories->attach($relatedCategory);
     }
-    
+
     /**
      * Removes a Category
      *
@@ -396,7 +397,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedCategories->detach($relatedCategoryToRemove);
     }
-    
+
     /**
      * Returns the relatedCategories
      *
@@ -406,7 +407,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->relatedCategories;
     }
-    
+
     /**
      * Sets the relatedCategories
      *
@@ -417,7 +418,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedCategories = $relatedCategories;
     }
-    
+
     /**
      * Adds a Question
      *
@@ -428,7 +429,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedQuestions->attach($relatedQuestion);
     }
-    
+
     /**
      * Removes a Question
      *
@@ -439,7 +440,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedQuestions->detach($relatedQuestionToRemove);
     }
-    
+
     /**
      * Returns the relatedQuestions
      *
@@ -449,7 +450,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->relatedQuestions;
     }
-    
+
     /**
      * Sets the relatedQuestions
      *
@@ -460,7 +461,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedQuestions = $relatedQuestions;
     }
-    
+
     /**
      * Adds a Link
      *
@@ -471,7 +472,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->links->attach($link);
     }
-    
+
     /**
      * Removes a Link
      *
@@ -482,7 +483,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->links->detach($linkToRemove);
     }
-    
+
     /**
      * Returns the links
      *
@@ -492,7 +493,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->links;
     }
-    
+
     /**
      * Sets the links
      *
@@ -507,24 +508,27 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @return string
      */
-    public function getSlug() {
+    public function getSlug()
+    {
         return $this->slug;
     }
 
     /**
      * @param string $slug
      */
-    public function setSlug( $slug ) {
+    public function setSlug($slug)
+    {
         $this->slug = $slug;
     }
 
     /**
-     *  @return array
+     * @return array
      */
-    public function getLinkarguments() {
+    public function getLinkarguments()
+    {
         $arguments = array();
 
-        if($this->getParent()){
+        if ($this->getParent()) {
             $arguments = $this->getParent()->getLinkarguments();
         }
 
@@ -534,20 +538,21 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     }
 
-	/**
-	 *  @return array
-	 */
-	public function getParentCategories() {
-		$arguments = array();
+    /**
+     * @return array
+     */
+    public function getParentCategories()
+    {
+        $arguments = array();
 
-		if($this->getParent()){
-			$arguments = $this->getParent()->getParentCategories();
-		}
+        if ($this->getParent()) {
+            $arguments = $this->getParent()->getParentCategories();
+        }
 
-		$arguments[] = $this->getHeadline();
+        $arguments[] = $this->getHeadline();
 
-		return $arguments;
+        return $arguments;
 
-	}
+    }
 
 }

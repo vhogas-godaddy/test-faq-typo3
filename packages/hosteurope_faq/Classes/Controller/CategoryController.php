@@ -117,7 +117,6 @@ class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
                             $lastSlug = isset($slug[$i + 1]) && $slug[$i + 1] ? false : true;
                             if ($entity->getSlug() == $slug[$i] && $lastSlug) {
                                 return (new ForwardResponse('frage'))->withArguments(['question' => $entity]);
-                                continue;
                             }
                         }
                     }
@@ -201,7 +200,6 @@ class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
         $this->view->assign('category', $category);
         $this->view->assign('root_categories', $this->_getCategoryTree());
-
         return $this->htmlResponse();
     }
 

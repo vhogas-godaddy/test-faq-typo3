@@ -1,4 +1,5 @@
 <?php
+
 namespace HostEuropeGmbh\HosteuropeFaq\Domain\Model;
 
 /***************************************************************
@@ -46,40 +47,40 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $faqid = '';
 
-	/**
-	 * countja
-	 *
-	 * @var integer
-	 */
-	protected $countja = '';
+    /**
+     * countja
+     *
+     * @var integer
+     */
+    protected $countja = '';
 
-	/**
-	 * countnein
-	 *
-	 * @var integer
-	 */
-	protected $countnein = '';
+    /**
+     * countnein
+     *
+     * @var integer
+     */
+    protected $countnein = '';
 
-	/**
-	 * countview
-	 *
-	 * @var integer
-	 */
-	protected $countview = '';
+    /**
+     * countview
+     *
+     * @var integer
+     */
+    protected $countview = '';
 
-	/**
-	 * prio
-	 *
-	 * @var integer
-	 */
-	protected $prio = '';
+    /**
+     * prio
+     *
+     * @var integer
+     */
+    protected $prio = '';
 
-	/**
-	 * countsend
-	 *
-	 * @var integer
-	 */
-	protected $countsend = '';
+    /**
+     * countsend
+     *
+     * @var integer
+     */
+    protected $countsend = '';
 
     /**
      * slug
@@ -87,56 +88,56 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $slug = '';
-    
+
     /**
      * content
      *
      * @var string
      */
     protected $content = '';
-    
+
     /**
      * showTop
      *
      * @var bool
      */
     protected $showTop = false;
-    
+
     /**
      * showForm
      *
      * @var string
      */
     protected $showForm = '';
-    
+
     /**
      * showVote
      *
      * @var string
      */
     protected $showVote = '';
-    
+
     /**
      * alias
      *
      * @var string
      */
     protected $alias = '';
-    
+
     /**
      * seotitle
      *
      * @var string
      */
     protected $seotitle = '';
-    
+
     /**
      * seodescription
      *
      * @var string
      */
     protected $seodescription = '';
-    
+
     /**
      * links
      *
@@ -144,28 +145,28 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $links = null;
-    
+
     /**
      * categories
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Category>
      */
     protected $categories = null;
-    
+
     /**
      * relatedCategories
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Category>
      */
     protected $relatedCategories = null;
-    
+
     /**
      * relatedQuestions
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HostEuropeGmbh\HosteuropeFaq\Domain\Model\Question>
      */
     protected $relatedQuestions = null;
-    
+
     /**
      * __construct
      */
@@ -174,7 +175,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
-    
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
@@ -190,7 +191,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->relatedCategories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->relatedQuestions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
-    
+
     /**
      * Returns the headline
      *
@@ -200,7 +201,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->headline;
     }
-    
+
     /**
      * Sets the headline
      *
@@ -211,7 +212,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->headline = $headline;
     }
-    
+
     /**
      * Returns the content
      *
@@ -220,13 +221,13 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getContent()
     {
         $content = $this->content;
-        $content = str_replace("https://www.hosteurope.de/typo3/#","https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."#",$content);
-        $content = str_replace("https://www.hosteurope.de/#","https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."#",$content);
-        $content = str_replace("https://www.hosteurope.de#","https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."#",$content);
-        $content = str_replace("faq-preview/#","#",$content);
+        $content = str_replace("https://www.hosteurope.de/typo3/#", "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . "#", $content);
+        $content = str_replace("https://www.hosteurope.de/#", "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . "#", $content);
+        $content = str_replace("https://www.hosteurope.de#", "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . "#", $content);
+        $content = str_replace("faq-preview/#", "#", $content);
         return $content;
     }
-    
+
     /**
      * Sets the content
      *
@@ -237,7 +238,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->content = $content;
     }
-    
+
     /**
      * Returns the showTop
      *
@@ -247,7 +248,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->showTop;
     }
-    
+
     /**
      * Sets the showTop
      *
@@ -258,7 +259,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->showTop = $showTop;
     }
-    
+
     /**
      * Returns the boolean state of showTop
      *
@@ -268,7 +269,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->showTop;
     }
-    
+
     /**
      * Returns the showForm
      *
@@ -278,7 +279,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->showForm;
     }
-    
+
     /**
      * Sets the showForm
      *
@@ -289,7 +290,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->showForm = $showForm;
     }
-    
+
     /**
      * Returns the showVote
      *
@@ -299,7 +300,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->showVote;
     }
-    
+
     /**
      * Sets the showVote
      *
@@ -310,7 +311,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->showVote = $showVote;
     }
-    
+
     /**
      * Returns the alias
      *
@@ -320,7 +321,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->alias;
     }
-    
+
     /**
      * Sets the alias
      *
@@ -331,7 +332,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->alias = $alias;
     }
-    
+
     /**
      * Returns the seotitle
      *
@@ -341,7 +342,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->seotitle;
     }
-    
+
     /**
      * Sets the seotitle
      *
@@ -352,7 +353,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->seotitle = $seotitle;
     }
-    
+
     /**
      * Returns the seodescription
      *
@@ -362,7 +363,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->seodescription;
     }
-    
+
     /**
      * Sets the seodescription
      *
@@ -374,7 +375,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->seodescription = $seodescription;
     }
 
-    
+
     /**
      * Adds a Category
      *
@@ -385,7 +386,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->categories->attach($category);
     }
-    
+
     /**
      * Removes a Category
      *
@@ -396,7 +397,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->categories->detach($categoryToRemove);
     }
-    
+
     /**
      * Returns the categories
      *
@@ -406,7 +407,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->categories;
     }
-    
+
     /**
      * Sets the categories
      *
@@ -417,7 +418,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->categories = $categories;
     }
-    
+
     /**
      * Adds a Category
      *
@@ -428,7 +429,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedCategories->attach($relatedCategory);
     }
-    
+
     /**
      * Removes a Category
      *
@@ -439,7 +440,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedCategories->detach($relatedCategoryToRemove);
     }
-    
+
     /**
      * Returns the relatedCategories
      *
@@ -449,7 +450,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->relatedCategories;
     }
-    
+
     /**
      * Sets the relatedCategories
      *
@@ -460,7 +461,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedCategories = $relatedCategories;
     }
-    
+
     /**
      * Adds a Question
      *
@@ -471,7 +472,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedQuestions->attach($relatedQuestion);
     }
-    
+
     /**
      * Removes a Question
      *
@@ -482,7 +483,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedQuestions->detach($relatedQuestionToRemove);
     }
-    
+
     /**
      * Returns the relatedQuestions
      *
@@ -492,7 +493,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->relatedQuestions;
     }
-    
+
     /**
      * Sets the relatedQuestions
      *
@@ -503,7 +504,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->relatedQuestions = $relatedQuestions;
     }
-    
+
     /**
      * Adds a Link
      *
@@ -514,7 +515,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->links->attach($link);
     }
-    
+
     /**
      * Removes a Link
      *
@@ -525,7 +526,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->links->detach($linkToRemove);
     }
-    
+
     /**
      * Returns the links
      *
@@ -535,7 +536,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->links;
     }
-    
+
     /**
      * Sets the links
      *
@@ -550,21 +551,24 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @return string
      */
-    public function getSlug() {
+    public function getSlug()
+    {
         return $this->slug;
     }
 
     /**
      * @param string $slug
      */
-    public function setSlug( $slug ) {
+    public function setSlug($slug)
+    {
         $this->slug = $slug;
     }
 
     /**
-     *  @return array
+     * @return array
      */
-    public function getLinkarguments() {
+    public function getLinkarguments()
+    {
 
         /**
          * @var \HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository $categoryRepository
@@ -572,9 +576,9 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $categoryRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository::class);
         $category = $categoryRepository->findOneByPid($this->getPid());
 
-        if($category){
+        if ($category) {
             $arguments = $category->getLinkarguments();
-        }else{
+        } else {
             $arguments = array();
         }
 
@@ -583,140 +587,154 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $arguments;
     }
 
-	/**
-	 *  @return array
-	 */
-	public function getParentCategories() {
+    /**
+     * @return array
+     */
+    public function getParentCategories()
+    {
 
-		/**
-		 * @var \HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository $categoryRepository
-		 */
-		$categoryRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository::class);
-		$category = $categoryRepository->findOneByPid($this->getPid());
+        /**
+         * @var \HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository $categoryRepository
+         */
+        $categoryRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository::class);
+        $category = $categoryRepository->findOneByPid($this->getPid());
 
-		if($category){
-			$arguments = $category->getParentCategories();
-		}else{
-			$arguments = array();
-		}
+        if ($category) {
+            $arguments = $category->getParentCategories();
+        } else {
+            $arguments = array();
+        }
 
-		return $arguments;
+        return $arguments;
 
-	}
+    }
 
     /**
      * @return int
      */
-    public function getFaqid() {
+    public function getFaqid()
+    {
         return $this->faqid;
     }
 
     /**
      * @param int $faqid
      */
-    public function setFaqid( $faqid ) {
+    public function setFaqid($faqid)
+    {
         $this->faqid = $faqid;
     }
 
-	/**
-	 * @return int
-	 */
-	public function getCountview() {
-		return $this->countview;
-	}
+    /**
+     * @return int
+     */
+    public function getCountview()
+    {
+        return $this->countview;
+    }
 
-	/**
-	 * @param int $countview
-	 */
-	public function setCountview( $countview ) {
-		$this->countview = $countview;
-	}
+    /**
+     * @param int $countview
+     */
+    public function setCountview($countview)
+    {
+        $this->countview = $countview;
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getCountnein() {
-		return $this->countnein;
-	}
+    /**
+     * @return int
+     */
+    public function getCountnein()
+    {
+        return $this->countnein;
+    }
 
-	/**
-	 * @param int $countnein
-	 */
-	public function setCountnein( $countnein ) {
-		$this->countnein = $countnein;
-	}
+    /**
+     * @param int $countnein
+     */
+    public function setCountnein($countnein)
+    {
+        $this->countnein = $countnein;
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getCountja() {
-		return $this->countja;
-	}
+    /**
+     * @return int
+     */
+    public function getCountja()
+    {
+        return $this->countja;
+    }
 
-	/**
-	 * @param int $countja
-	 */
-	public function setCountja( $countja ) {
-		$this->countja = $countja;
-	}
+    /**
+     * @param int $countja
+     */
+    public function setCountja($countja)
+    {
+        $this->countja = $countja;
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getCountsend() {
-		return $this->countsend;
-	}
+    /**
+     * @return int
+     */
+    public function getCountsend()
+    {
+        return $this->countsend;
+    }
 
-	/**
-	 * @param int $countsend
-	 */
-	public function setCountsend( $countsend ) {
-		$this->countsend = $countsend;
-	}
+    /**
+     * @param int $countsend
+     */
+    public function setCountsend($countsend)
+    {
+        $this->countsend = $countsend;
+    }
 
-	public function getIndex(){
-		$index = array();
+    public function getIndex()
+    {
+        $index = array();
 
-		$index['s_name'] = $this->getHeadline();
-		$index['slug'] = $this->getSlug();
-		$index['prio'] = $this->getPrio();
-		$index['linkArguments'] = $this->getLinkarguments();
-		$index['s_categories'] = $this->getParentCategories();
+        $index['s_name'] = $this->getHeadline();
+        $index['slug'] = $this->getSlug();
+        $index['prio'] = $this->getPrio();
+        $index['linkArguments'] = $this->getLinkarguments();
+        $index['s_categories'] = $this->getParentCategories();
 
-		$c = strip_tags($this->getContent());
-		$c = preg_replace('/\s+/', ' ',$c);
-		$c = str_replace("\n"," ",$c);
-		$c = str_replace("\t"," ",$c);
-		$c = str_replace("\r"," ",$c);
-		$index['content'] =  $c;
-		$desc = mb_substr($c,0,400);
+        $c = strip_tags($this->getContent());
+        $c = preg_replace('/\s+/', ' ', $c);
+        $c = str_replace("\n", " ", $c);
+        $c = str_replace("\t", " ", $c);
+        $c = str_replace("\r", " ", $c);
+        $index['content'] = $c;
+        $desc = mb_substr($c, 0, 400);
 
-		if(strlen($c) > 400){
-			$desc = $desc."...";
-		}
+        if (strlen($c) > 400) {
+            $desc = $desc . "...";
+        }
 
-		$index['s_description'] = $desc;
-		$index['views'] = $this->getCountview();
-		$index['s_language_uid'] = 0;
-		$index['s_subline']  = "FAQ / ".implode(" / ",$index['s_categories']);
-		$index['s_sort']  = mb_strtolower( $index['s_name'], 'UTF-8' );
-		$index['s_label'] = "question";
+        $index['s_description'] = $desc;
+        $index['views'] = $this->getCountview();
+        $index['s_language_uid'] = 0;
+        $index['s_subline'] = "FAQ / " . implode(" / ", $index['s_categories']);
+        $index['s_sort'] = mb_strtolower($index['s_name'], 'UTF-8');
+        $index['s_label'] = "question";
 
-		return $index;
-	}
+        return $index;
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getPrio() {
-		return $this->prio;
-	}
+    /**
+     * @return int
+     */
+    public function getPrio()
+    {
+        return $this->prio;
+    }
 
-	/**
-	 * @param int $prio
-	 */
-	public function setPrio( $prio ) {
-		$this->prio = $prio;
-	}
+    /**
+     * @param int $prio
+     */
+    public function setPrio($prio)
+    {
+        $this->prio = $prio;
+    }
 
 }

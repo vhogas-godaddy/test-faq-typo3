@@ -1,4 +1,5 @@
 <?php
+
 namespace HostEuropeGmbh\HosteuropeFaq\Domain\Model;
 
 /***************************************************************
@@ -38,28 +39,28 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $name = '';
-    
+
     /**
      * link
      *
      * @var string
      */
     protected $link = '';
-    
+
     /**
      * target
      *
      * @var string
      */
     protected $target = '';
-    
+
     /**
      * relation
      *
      * @var string
      */
     protected $relation = '';
-    
+
     /**
      * Returns the name
      *
@@ -69,7 +70,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->name;
     }
-    
+
     /**
      * Sets the name
      *
@@ -80,7 +81,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->name = $name;
     }
-    
+
     /**
      * Returns the link
      *
@@ -90,7 +91,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->link;
     }
-    
+
     /**
      * Sets the link
      *
@@ -101,7 +102,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->link = $link;
     }
-    
+
     /**
      * Returns the target
      *
@@ -111,7 +112,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->target;
     }
-    
+
     /**
      * Sets the target
      *
@@ -122,7 +123,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->target = $target;
     }
-    
+
     /**
      * Returns the relation
      *
@@ -132,7 +133,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->relation;
     }
-    
+
     /**
      * Sets the relation
      *

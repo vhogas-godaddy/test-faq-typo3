@@ -16,7 +16,6 @@ class RecordLinkBuilder extends AbstractTypolinkBuilder
      */
     public function build(array &$linkDetails, string $linkText, string $target, array $conf): LinkResultInterface
     {
-        die();
         $tsfe = $this->getTypoScriptFrontendController();
         $pageTsConfig = BackendUtility::getPagesTSconfig($tsfe->id);
         $configurationKey = $linkDetails['identifier'] . '.';

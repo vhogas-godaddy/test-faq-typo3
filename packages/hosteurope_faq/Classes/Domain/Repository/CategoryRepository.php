@@ -1,4 +1,5 @@
 <?php
+
 namespace HostEuropeGmbh\HosteuropeFaq\Domain\Repository;
 
 /***************************************************************
@@ -25,78 +26,82 @@ namespace HostEuropeGmbh\HosteuropeFaq\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 use HostEuropeGmbh\HosteuropeFaq\Domain\Model\Category;
 
 /**
  * The repository for Categories
  */
-class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
-	/**
-	 * @var array
-	 */
-	protected $defaultOrderings = array(
-		'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-	);
+    /**
+     * @var array
+     */
+    protected $defaultOrderings = array(
+        'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+    );
 
-	// Example for repository wide settings
-	public function initializeObject() {
-		$querySettings = $this->createQuery()->getQuerySettings();
-		// don't add the pid constraint
-		$querySettings->setRespectStoragePage( false );
-		$this->setDefaultQuerySettings( $querySettings );
-	}
-
-
-	/**
-	 * @param $slug
-	 *
-	 * @return Category
-	 */
-	public function findRootCategory( $slug ) {
-		$query = $this->createQuery();
-		$query->matching(
-			$query->logicalAnd(
-				$query->equals( 'parent', 0 ),
-				$query->equals( 'slug', $slug )
-			)
-		);
-
-		$category = $query->execute();
-		if ( count( $category ) ) {
-			return $category->getFirst();
-		} else {
-			return false;
-		}
-
-	}
+    // Example for repository wide settings
+    public function initializeObject()
+    {
+        $querySettings = $this->createQuery()->getQuerySettings();
+        // don't add the pid constraint
+        $querySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($querySettings);
+    }
 
 
-	public function findByParent( $parentUid ) {
+    /**
+     * @param $slug
+     *
+     * @return Category
+     */
+    public function findRootCategory($slug)
+    {
+        $query = $this->createQuery();
+        $query->matching(
+            $query->logicalAnd(
+                $query->equals('parent', 0),
+                $query->equals('slug', $slug)
+            )
+        );
 
-		$query  = $this->createQuery();
+        $category = $query->execute();
+        if (count($category)) {
+            return $category->getFirst();
+        } else {
+            return false;
+        }
 
-		$query = $query->statement( '
+    }
+
+
+    public function findByParent($parentUid)
+    {
+
+        $query = $this->createQuery();
+
+        $query = $query->statement('
 SELECT 
 	c.* 
 FROM 
 	tx_hosteuropefaq_domain_model_category as c, 
 	pages as p
 WHERE 
-	c.parent = '.intval($parentUid).' AND 
+	c.parent = ' . intval($parentUid) . ' AND 
 	c.pid = p.uid 
   
 	AND NOT c.deleted
      AND NOT c.hidden
-     AND (c.starttime<='.time().')
-     AND (c.endtime=0 OR c.endtime>'.time().')
+     AND (c.starttime<=' . time() . ')
+     AND (c.endtime=0 OR c.endtime>' . time() . ')
 ORDER BY 
 	p.sorting ASC'
-		);
+        );
 
 
-
-		return $query->execute();
-	}
+        return $query->execute();
+    }
 
 }

@@ -5,6 +5,7 @@
 	"type": "project",
 	"config": {
 		"allow-plugins": {
+			"php-http/discovery": true,
 			"typo3/class-alias-loader": true,
 			"typo3/cms-composer-installers": true
 		},
@@ -14,6 +15,7 @@
 		"sort-packages": true
 	},
 	"require": {
+		"elasticsearch/elasticsearch": "^8",
 		"fluidtypo3/vhs": "^7.2",
 		"host-europe/hosteurope-faq": "@dev",
 		"host-europe/hosteurope-template": "@dev",

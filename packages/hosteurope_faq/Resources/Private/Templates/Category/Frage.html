@@ -22,7 +22,7 @@
                     </h1>
                     <div class="content">
                         <!--TYPO3SEARCH_begin-->
-                        <f:format.raw><v:format.replace substring="faq-preview/#" replacement="#"  caseSensitive="0">{question.content->f:format.html()}</v:format.replace></f:format.raw>
+                        <f:format.raw><v:format.replace substring="faq-preview/#" replacement="#"  caseSensitive="0">{question.content}</v:format.replace></f:format.raw>
                         <!--TYPO3SEARCH_end-->
                         <hr class="push-left">
                         <f:if condition="{question.show_form}">
@@ -83,9 +83,6 @@
 
                             </f:else>
                         </f:if>
-                        <f:if condition="{downloads->f:count()}">
-                            <f:render partial="Category/Downloads" arguments="{downloads:downloads}" />
-                        </f:if>
                         <f:if condition="{question.relatedQuestions->f:count()}">
                             <div class="cross-linking push-left">
                                 <p>
@@ -96,21 +93,18 @@
                                 </p>
                             </div>
                         </f:if>
-                        <f:if condition="{category.crosssellingTeaser->f:count()}">
-                            <f:render partial="Category/Crossselling" arguments="{teaser_objects:category.crosssellingTeaser}" />
-                        </f:if>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <f:if condition="{showMarketingCookieInfo}">
+
         <div class="customerInfo_support_cookie">
             <div class="support_cookie_disable_inner">
                 <b>Support-Chat nicht sichtbar?</b>
                 <p>Der Support-Chat ist in Ihren Cookie Einstellungen deaktiviert. Klicken Sie <b><a href="https://www.hosteurope.de/AGB/Datenschutzerklaerung/">hier</a></b> und aktivieren Sie den Support-Chat.</p>
             </div>
         </div>
-    </f:if>
+
     <!--TYPO3SEARCH_begin-->
 </f:section>

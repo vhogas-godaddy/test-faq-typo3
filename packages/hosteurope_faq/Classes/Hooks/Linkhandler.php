@@ -20,7 +20,6 @@ class Linkhandler implements ProcessLinkParametersInterface {
 	 * @return void
 	 */
 	public function process($linkHandler){
-		die();
 		$link_config = $linkHandler->getTypolinkConfiguration();
 		$configurationKey = ($linkHandler->getConfigurationKey());
 
