@@ -2,6 +2,7 @@ base: /
 dependencies:
   - host-europe/hosteurope-template
   - host-europe/hosteurope-faq
+  - tpwd/ke_search
   - typo3/fluid-styled-content
 languages:
   -

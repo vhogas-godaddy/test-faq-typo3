@@ -97,6 +97,13 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $content = '';
 
     /**
+     * tstamp
+     *
+     * @var int
+     */
+    protected $tstamp = 0;
+
+    /**
      * showTop
      *
      * @var bool
@@ -375,6 +382,26 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->seodescription = $seodescription;
     }
 
+    /**
+     * Returns the tstamp
+     *
+     * @return int $tstamp
+     */
+    public function getTstamp()
+    {
+        return $this->tstamp;
+    }
+
+    /**
+     * Sets the tstamp
+     *
+     * @param int $tstamp
+     * @return void
+     */
+    public function setTstamp($tstamp)
+    {
+        $this->tstamp = $tstamp;
+    }
 
     /**
      * Adds a Category
@@ -687,38 +714,6 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setCountsend($countsend)
     {
         $this->countsend = $countsend;
-    }
-
-    public function getIndex()
-    {
-        $index = array();
-
-        $index['s_name'] = $this->getHeadline();
-        $index['slug'] = $this->getSlug();
-        $index['prio'] = $this->getPrio();
-        $index['linkArguments'] = $this->getLinkarguments();
-        $index['s_categories'] = $this->getParentCategories();
-
-        $c = strip_tags($this->getContent());
-        $c = preg_replace('/\s+/', ' ', $c);
-        $c = str_replace("\n", " ", $c);
-        $c = str_replace("\t", " ", $c);
-        $c = str_replace("\r", " ", $c);
-        $index['content'] = $c;
-        $desc = mb_substr($c, 0, 400);
-
-        if (strlen($c) > 400) {
-            $desc = $desc . "...";
-        }
-
-        $index['s_description'] = $desc;
-        $index['views'] = $this->getCountview();
-        $index['s_language_uid'] = 0;
-        $index['s_subline'] = "FAQ / " . implode(" / ", $index['s_categories']);
-        $index['s_sort'] = mb_strtolower($index['s_name'], 'UTF-8');
-        $index['s_label'] = "question";
-
-        return $index;
     }
 
     /**

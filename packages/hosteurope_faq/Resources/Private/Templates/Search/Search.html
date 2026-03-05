@@ -16,7 +16,6 @@
                 <div class="ui action input">
                     <form method="get" id="tx_indexedsearch" action="{f:uri.page(pageUid:pid)}">
                         <input placeholder="Webseite durchsuchen" class="tx-indexedsearch-searchbox-sword prompt" type="text" name="q" value="{q}">
-                        <input type="hidden" name="s" value="{s}"/>
                         <button class="ui icon button">
                             <span class="show-for-medium">Suche</span> <i></i>
                         </button>
@@ -35,30 +34,41 @@
         </div>
     </div>
 </section>
-<div class="section grey">
-    <div class="row">
-        <div class="small-12 columns search-tabs">
-            <div class="ui pointing secondary menu">
-                <f:for each="{results}" as="result" iteration="iteration" key="key">
-                    <a class="item {f:if(condition:result.active,then:' active')}" data-tab="tab{key}">{result.name} ({result.total})</a>
-                </f:for>
-            </div>
-            <f:for each="{results}" as="result" iteration="iteration" key="key">
-                <div class="ui tab {f:if(condition:result.active,then:' active')}" data-tab="tab{key}">
+<f:if condition="{results}">
+    <div class="section grey">
+        <div class="row">
+            <div class="small-12 columns search-tabs">
+                <div class="ui pointing secondary menu">
+                    <span class="item active">FAQ ({total})</span>
+                </div>
+                <div class="ui tab active">
                     <div class="ui list large">
-                        <f:for each="{result.results}" as="entry" iteration="it2">
+                        <f:for each="{results}" as="entry" iteration="it">
                             <div class="item">
-                                <div class="header"><a href="{entry._source.s_url}" title="{entry._source.s_name}">{it2.cycle}. {entry._source.s_name}</a></div>
-                                <span class="path">{entry._source.s_subline}</span>
-                                <p>{entry._source.s_description->f:format.raw()}</p>
+                                <div class="header"><a href="{entry.url}" title="{entry.title}">{it.cycle}. {entry.title}</a></div>
+                                <span class="path">{entry.hidden_content}</span>
+                                <p>{entry.description -> f:format.raw()}</p>
                             </div>
                         </f:for>
                     </div>
                 </div>
-            </f:for>
+            </div>
         </div>
     </div>
-</div>
+</f:if>
+<f:if condition="{q}">
+    <f:then>
+        <f:if condition="{total} == 0">
+            <div class="section grey">
+                <div class="row">
+                    <div class="small-12 columns">
+                        <p>Keine Ergebnisse gefunden.</p>
+                    </div>
+                </div>
+            </div>
+        </f:if>
+    </f:then>
+</f:if>
 <f:if condition="{showMarketingCookieInfo}">
     <div class="customerInfo_support_cookie">
         <div class="support_cookie_disable_inner">

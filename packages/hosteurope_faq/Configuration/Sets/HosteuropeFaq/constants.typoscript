@@ -1,0 +1,3 @@
+plugin.tx_kesearch.templateRootPath = EXT:hosteurope_faq/Resources/Private/Templates/KeSearch/
+plugin.tx_kesearch.partialRootPath = EXT:hosteurope_faq/Resources/Private/Partials/KeSearch/
+plugin.tx_kesearch.layoutRootPath = EXT:hosteurope_faq/Resources/Private/Layouts/KeSearch/

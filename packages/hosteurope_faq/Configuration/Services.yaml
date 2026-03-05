@@ -19,3 +19,9 @@ services:
 
   HostEuropeGmbh\HosteuropeFaq\Hooks\Linkhandler:
     public: true
+
+  HostEuropeGmbh\HosteuropeFaq\Indexer\FaqIndexer:
+    public: true
+
+  HostEuropeGmbh\HosteuropeFaq\Indexer\FaqIndexerConfiguration:
+    public: true

@@ -2,302 +2,227 @@
 
 namespace HostEuropeGmbh\HosteuropeFaq\Controller;
 
-/***************************************************************
- *
- *  Copyright notice
- *
- *  (c) 2016
- *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
-
-use HostEuropeGmbh\HosteuropeFaq\Domain\Model\Question;
-use HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resources\Content;
+use HostEuropeGmbh\HosteuropeFaq\Indexer\FaqIndexer;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
-/**
- * SearchController
- */
-class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class SearchController extends ActionController
 {
-
-    /**
-     * categoryRepository
-     *
-     * @var \HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository
-     */
-    protected $categoryRepository = null;
-
-    /**
-     * questionRepository
-     *
-     * @var \HostEuropeGmbh\HosteuropeFaq\Domain\Repository\QuestionRepository
-     */
-    protected $questionRepository = null;
-
-    public function __construct()
-    {
-        $this->categoryRepository = GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\CategoryRepository::class);
-        $this->questionRepository = GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeFaq\Domain\Repository\QuestionRepository::class);
-    }
-
-
-    protected function _search($query, $s = null)
+    protected function _search(string $query): array
     {
         $this->_displayCancelCookieHint();
 
-        $s_language_uid = 0;
         $pageid = intval($GLOBALS['TSFE']->id);
         $this->view->assign('pid', $pageid);
 
-        $return_object = array();
+        // Minimum character length for a search word to be included (must match MySQL ft_min_token_size)
+        $searchWordLength = 3;
+        // Multiplier for title relevance: higher values rank title matches above body-only matches
+        $titleBoostFactor = 3;
+        // Appends wildcard suffix (*) so "host" also matches "hosting", "hostname", etc.
+        $enablePartSearch = true;
+        // When true, all search words must be present (AND); when false, any word can match (OR)
+        $enableExplicitAnd = false;
 
-        $expand_mode = 0;
+        $searchWords = preg_split('/\s+/', trim($query));
+        $searchWords = array_filter($searchWords, fn($w) => mb_strlen($w) >= $searchWordLength);
 
-
-        $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
-            $query,
-            $label = "",
-            $categories = array(),
-            $s_language_uid,
-            $offset = 0,
-            $limit = 100,
-            $expand = 0,
-            $sort_by = null,
-            $sort = "asc",
-            $highlight = true);
-
-        $suggest_option = false;
-
-
-        //Erweitern um *
-        if ($search_result['hits']['total']['value'] == 0) {
-            $expand_mode++;
-
-            $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
-                $query,
-                $label = "",
-                $categories = array(),
-                $s_language_uid,
-                $offset = 0,
-                $limit = 100,
-                $expand_mode
-            );
-
-            if (!empty($search_result['suggest']['suggestion'][0]['options'])) {
-
-                $suggest_option = $search_result['suggest']['suggestion'][0]['options'][0]['text'];
-
-            }
-        }
-        $this->view->assign('suggest_option', $suggest_option);
-
-        $expand_mode = 0;
-        $return_object['all'] = array(
-            'name' => 'Alle Ergebnisse',
-            'results' => $search_result['hits']['hits'],
-            'total' => $search_result['hits']['total']['value'],
-
-        );
-        if (is_null($s) or $s == "a" or $s == "") {
-            $return_object['all']['active'] = true;
-        } else {
-            $return_object['all']['active'] = false;
+        if (empty($searchWords)) {
+            $suggest = $this->_suggest($query);
+            return [
+                'results' => [],
+                'total' => 0,
+                'suggest_option' => $suggest,
+            ];
         }
 
+        $wordsAgainst = implode(' ', array_map(
+            function ($w) use ($enablePartSearch, $enableExplicitAnd) {
+                $term = $w;
+                if ($enablePartSearch) {
+                    $term .= '*';
+                }
+                if ($enableExplicitAnd) {
+                    $term = '+' . $term;
+                }
+                return $term;
+            },
+            $searchWords
+        ));
+        $scoreAgainst = implode(' ', $searchWords);
 
-        $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
-            $query,
-            'question',
-            $categories = array(),
-            $s_language_uid,
-            $offset = 0,
-            $limit = 100,
-            $expand_mode);
+        $matchColumns = 'title,content,hidden_content';
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_kesearch_index');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_kesearch_index');
+        $queryBuilder->getRestrictions()->removeAll();
 
-        if ($search_result['hits']['total']['value'] > 0) {
-            $return_object['question'] = array(
-                'name' => 'FAQ',
-                'results' => $search_result['hits']['hits'],
-                'total' => $search_result['hits']['total']['value'],
-            );
-            if ($s == "q") {
-                $return_object['question']['active'] = true;
-            } else {
-                $return_object['question']['active'] = false;
-            }
+        $wordsAgainstQuoted = $connection->quote($wordsAgainst);
+        $scoreAgainstQuoted = $connection->quote($scoreAgainst);
 
+        $rows = $queryBuilder
+            ->select('uid', 'title', 'abstract', 'params', 'targetpid', 'tags', 'type', 'hidden_content')
+            ->addSelectLiteral(
+                'MATCH (' . $matchColumns . ') AGAINST (' . $scoreAgainstQuoted . ')'
+                . ' + (' . $titleBoostFactor . ' * MATCH (title) AGAINST (' . $scoreAgainstQuoted . '))'
+                . ' AS score'
+            )
+            ->from('tx_kesearch_index')
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'type',
+                    $queryBuilder->createNamedParameter(FaqIndexer::INDEXER_TYPE)
+                )
+            )
+            ->andWhere(
+                'MATCH (' . $matchColumns . ') AGAINST (' . $wordsAgainstQuoted . ' IN BOOLEAN MODE)'
+            )
+            ->orderBy('score', 'DESC')
+            ->setMaxResults(100)
+            ->executeQuery()
+            ->fetchAllAssociative();
 
+        $results = [];
+        foreach ($rows as $row) {
+            $targetPid = $row['targetpid'] ?: $pageid;
+            $url = $this->buildFaqUrl($targetPid, $row['params']);
+
+            $results[] = [
+                'title' => $row['title'],
+                'description' => $row['abstract'],
+                'url' => $url,
+                'hidden_content' => $row['hidden_content'],
+            ];
         }
 
-        $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
-            $query,
-            'products',
-            $categories = array(),
-            $s_language_uid,
-            $offset = 0,
-            $limit = 100,
-            $expand_mode);
+        $suggest = $this->_suggest($query);
 
-
-        if ($search_result['hits']['total']['value'] > 0) {
-            $return_object['products'] = array(
-                'name' => 'Produkte',
-                'results' => $search_result['hits']['hits'],
-                'total' => $search_result['hits']['total']['value'],
-            );
-            if ($s == "p") {
-                $return_object['products']['active'] = true;
-            } else {
-                $return_object['products']['active'] = false;
-            }
-        }
-
-        $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
-            $query,
-            'other',
-            $categories = array(),
-            $s_language_uid,
-            $offset = 0,
-            $limit = 100,
-            $expand_mode);
-        if ($search_result['hits']['total']['value'] > 0) {
-            $return_object['other'] = array(
-                'name' => 'Sonstiges',
-                'results' => $search_result['hits']['hits'],
-                'total' => $search_result['hits']['total']['value'],
-            );
-            if ($s == "o") {
-                $return_object['other']['active'] = true;
-            } else {
-                $return_object['other']['active'] = false;
-            }
-        }
-
-        return $return_object;
+        return [
+            'results' => $results,
+            'total' => count($results),
+            'suggest_option' => $suggest,
+        ];
     }
 
+    protected function buildFaqUrl(int $targetPid, string $params): string
+    {
+        $cObj = GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
+        $conf = [
+            'parameter' => $targetPid,
+            'additionalParams' => $params,
+        ];
+        $url = $cObj->typoLink_URL($conf);
+        return $url ?: '#';
+    }
+
+    /**
+     * Simple DB-based suggestion: find titles that partially match the query.
+     */
+    protected function _suggest(string $query): ?string
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_kesearch_index');
+
+        $likePattern = '%' . $queryBuilder->escapeLikeWildcards($query) . '%';
+
+        $row = $queryBuilder
+            ->select('title')
+            ->from('tx_kesearch_index')
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'type',
+                    $queryBuilder->createNamedParameter(FaqIndexer::INDEXER_TYPE)
+                ),
+                $queryBuilder->expr()->like(
+                    'title',
+                    $queryBuilder->createNamedParameter($likePattern)
+                )
+            )
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        if ($row && mb_strtolower($row['title']) !== mb_strtolower($query)) {
+            return $row['title'];
+        }
+
+        return null;
+    }
 
     public function suggestAction()
     {
+        $query = htmlspecialchars($_GET['q'] ?? '');
 
-        $query = htmlspecialchars($_GET['q']);
+        $suggestions = [];
 
-        $s_language_uid = $GLOBALS['TSFE']->sys_language_uid;
-        $pageid = intval($GLOBALS['TSFE']->id);
+        if (strlen($query) >= 2) {
+            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getQueryBuilderForTable('tx_kesearch_index');
 
+            $likePattern = '%' . $queryBuilder->escapeLikeWildcards($query) . '%';
 
-        $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
-            $query,
-            $label = "",
-            $categories = array(),
-            $s_language_uid,
-            $offset = 0,
-            $limit = 100,
-            $expand_mode = 0,
-            $sort_by = null,
-            $sort = "asc",
-            $highlight = true,
-            $suggestion_size = 10
-        );
+            $rows = $queryBuilder
+                ->select('title')
+                ->from('tx_kesearch_index')
+                ->where(
+                    $queryBuilder->expr()->eq(
+                        'type',
+                        $queryBuilder->createNamedParameter(FaqIndexer::INDEXER_TYPE)
+                    ),
+                    $queryBuilder->expr()->like(
+                        'title',
+                        $queryBuilder->createNamedParameter($likePattern)
+                    )
+                )
+                ->setMaxResults(10)
+                ->executeQuery()
+                ->fetchAllAssociative();
 
-        $suggest_option = array();
-
-        if ($search_result['suggest']['suggestion'][0]['options']) {
-            foreach ($search_result['suggest']['suggestion'][0]['options'] as $suggest) {
-                $suggest_option[] = $suggest['text'];
+            foreach ($rows as $row) {
+                $suggestions[] = $row['title'];
             }
         }
 
-        echo json_encode($suggest_option);
-
-        die("");
+        echo json_encode($suggestions);
+        die('');
     }
-
 
     public function searchAction()
     {
-        if (isset($_GET['index'])) {
-            $this->_index();
-            die("indexed");
-        }
+        $q = htmlspecialchars($_GET['q'] ?? '');
 
-
-        $q = htmlspecialchars($_GET['q']);
-
-        if (!$q and isset($_GET['tx_indexedsearch_pi2']['search']['sword'])) {
+        if (!$q && isset($_GET['tx_indexedsearch_pi2']['search']['sword'])) {
             $q = htmlspecialchars($_GET['tx_indexedsearch_pi2']['search']['sword']);
         }
-        if (!$q and isset($_POST['tx_indexedsearch_pi2']['search']['sword'])) {
+        if (!$q && isset($_POST['tx_indexedsearch_pi2']['search']['sword'])) {
             $q = htmlspecialchars($_POST['tx_indexedsearch_pi2']['search']['sword']);
         }
-        $s = htmlspecialchars($_GET['s']);
+
         $results = null;
+        $suggestOption = null;
 
         if (strlen($q)) {
-            $results = $this->_search($q, $s);
+            $searchData = $this->_search($q);
+            $results = $searchData['results'];
+            $suggestOption = $searchData['suggest_option'];
         }
 
+        $pageid = intval($GLOBALS['TSFE']->id);
+        $this->view->assign('pid', $pageid);
         $this->view->assign('q', $q);
-        $this->view->assign('s', $s);
         $this->view->assign('results', $results);
+        $this->view->assign('total', $searchData['total'] ?? 0);
+        $this->view->assign('suggest_option', $suggestOption);
 
         return $this->htmlResponse();
     }
 
-    public function indexAction()
-    {
-        $this->_index();
-    }
-
-
-    protected function _index()
-    {
-        \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resources\Question::initMapping('hosteurope.de');
-        \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resources\Question::deleteAll('hosteurope.de');
-
-        $questions = $this->questionRepository->findAll();
-
-        /**
-         * @var Question $quoestion
-         */
-        foreach ($questions as $question) {
-
-            $es_object = $question->getIndex();
-            $es_object['s_url'] = str_replace("faaqqss/router/Controller/", "", '/faq/' . implode('/', $es_object['linkArguments']));
-
-            //@TODO ... entscheidung welcher index
-            \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resources\Question::indexData('hosteurope.de',
-                $question->getUid(),
-                $es_object);
-
-        }
-
-    }
-
-    private function _displayCancelCookieHint()
+    private function _displayCancelCookieHint(): void
     {
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        /**
-         * Marketing cookie - show info to customer to activate support
-         */
         $pageRenderer->addCssFile('EXT:hosteurope_template/Resources/Public/css/extra.css');
 
         if (isset($_COOKIE['OPTOUTMULTI']) && !empty($_COOKIE['OPTOUTMULTI'])) {
@@ -307,11 +232,8 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             }
 
             if (!empty($cookieValue) && strrpos($cookieValue, 'c3:1') !== false) {
-                // show extra message
                 $this->view->assign('showMarketingCookieInfo', true);
             }
-
         }
     }
-
 }

@@ -3,3 +3,4 @@ label: 'HostEurope FAQ'
 dependencies:
   - typo3/fluid-styled-content
   - host-europe/hosteurope-template
+  - tpwd/ke_search

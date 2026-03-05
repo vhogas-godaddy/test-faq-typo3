@@ -28,7 +28,6 @@ namespace HostEuropeGmbh\HosteuropeFaq\Controller;
  ***************************************************************/
 
 use HostEuropeGmbh\HosteuropeFaq\Domain\Model\Question;
-use HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resources\Content;
 use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

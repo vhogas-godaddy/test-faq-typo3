@@ -97,3 +97,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['linkhandler']['generateLink'][] = \HostEuropeGmbh\HosteuropeFaq\Hooks\Linkhandler::class;
 $GLOBALS['TYPO3_CONF_VARS']['FE']['typolinkBuilder']['record'] = \HostEuropeGmbh\HosteuropeFaq\Hooks\RecordLinkBuilder::class;
 
+// ke_search custom indexer for FAQ questions
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ke_search']['registerIndexerConfiguration'][] = \HostEuropeGmbh\HosteuropeFaq\Indexer\FaqIndexerConfiguration::class;
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ke_search']['customIndexer'][] = \HostEuropeGmbh\HosteuropeFaq\Indexer\FaqIndexer::class;
+
