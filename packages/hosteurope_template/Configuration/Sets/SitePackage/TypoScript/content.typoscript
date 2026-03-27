@@ -1,0 +1,5 @@
+# Same pattern as EXT:fluid_styled_content/Configuration/TypoScript/ContentElement/*.typoscript
+tt_content.hosteurope_newsletter =< lib.contentElement
+tt_content.hosteurope_newsletter {
+    templateName = Newsletter
+}

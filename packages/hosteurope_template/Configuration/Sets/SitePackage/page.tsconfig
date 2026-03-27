@@ -15,6 +15,15 @@ TCEFORM {
     }
 }
 
+mod.wizards.newContentElement.wizardItems.common.elements.hosteurope_newsletter {
+    iconIdentifier = content-text
+    title = Newsletter
+    description = Newsletter form
+    tt_content_defValues {
+        CType = hosteurope_newsletter
+    }
+}
+
 TCEMAIN.linkHandler {
     tx_hosteuropefaq_category {
         handler = TYPO3\CMS\Backend\LinkHandler\RecordLinkHandler
