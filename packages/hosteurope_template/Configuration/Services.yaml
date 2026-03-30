@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  HostEuropeGmbh\HosteuropeTemplate\:
+    resource: '../Classes/*'
+
+  HostEuropeGmbh\HosteuropeTemplate\Middleware\AjaxFormMiddleware:
+    public: true
