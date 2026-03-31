@@ -11,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final class AjaxController
 {
-    private const SUPPORTED_TYPES = ['newsletter', 'contact'];
+    private const SUPPORTED_TYPES = ['newsletter', 'getcustomer'];
 
     public function __construct(
         private readonly ResponseFactoryInterface $responseFactory,
@@ -26,7 +26,7 @@ final class AjaxController
 
         return match ($ajaxType) {
             'newsletter' => $this->newsletterAction($request),
-            'contact' => $this->contactAction($request),
+            'getcustomer' => $this->getCustomerAction($request),
         };
     }
 
@@ -85,9 +85,24 @@ final class AjaxController
         return $this->jsonResponse(['success' => true, 'message' => 'Subscriber added successfully']);
     }
 
-    private function contactAction(ServerRequestInterface $request): ResponseInterface
+    private function getCustomerAction(ServerRequestInterface $request): ResponseInterface
     {
-        return $this->jsonResponse(['success' => true]);
+        $customerSSO = GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeTemplate\Helper\SSO\Handler::class);
+
+        $data = $customerSSO->loginAjaxRequest();
+
+        if ($data) {
+            $currentUri = \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('REQUEST_URI');
+            list($logoutLink) = explode('?',$currentUri);
+
+            $data['loggedin'] = true;
+            $data['logout_link'] = $logoutLink.'?logout=1';
+        } else {
+            $data = array('loggedin' => false);
+        }
+
+        return $this->jsonResponse($data);
+        
     }
 
     private function jsonResponse(array $payload, int $status = 200): ResponseInterface
