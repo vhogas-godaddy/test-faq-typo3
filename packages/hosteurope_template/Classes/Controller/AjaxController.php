@@ -49,38 +49,38 @@ final class AjaxController
             return $this->jsonResponse(['success' => false, 'message' => 'Invalid email address'], 400);
         }
 
-        require_once( __DIR__ . '/../../Resources/Private/Libs/pmapi/pmapirequest.class.inc' );
-        require_once( __DIR__ . '/../../Resources/Private/Libs/pmapi/pmapiauthhash.class.inc' );
-        require_once( __DIR__ . '/../../Resources/Private/Libs/pmapi/pmapisubscriber.class.inc' );
+        // require_once( __DIR__ . '/../../Resources/Private/Libs/pmapi/pmapirequest.class.inc' );
+        // require_once( __DIR__ . '/../../Resources/Private/Libs/pmapi/pmapiauthhash.class.inc' );
+        // require_once( __DIR__ . '/../../Resources/Private/Libs/pmapi/pmapisubscriber.class.inc' );
 
-        $request = new \PMAPIRequest( new \PMAPIAuthHash( PMAPI_UID, PMAPI_CID, PMAPI_HASH ) );
+        // $request = new \PMAPIRequest( new \PMAPIAuthHash( PMAPI_UID, PMAPI_CID, PMAPI_HASH ) );
 
-        $args = array(
-            'email'     => $email,
-            'list_id'   => PMAPI_LIST_ID,
-            'confirmed' => 0,
-        );
+        // $args = array(
+        //     'email'     => $email,
+        //     'list_id'   => PMAPI_LIST_ID,
+        //     'confirmed' => 0,
+        // );
 
-        if ( strlen( $firstname ) ) {
-            $args['firstname'] = $firstname;
-        }
-        if ( strlen( $lastname ) ) {
-            $args['lastname'] = $lastname;
-        }
+        // if ( strlen( $firstname ) ) {
+        //     $args['firstname'] = $firstname;
+        // }
+        // if ( strlen( $lastname ) ) {
+        //     $args['lastname'] = $lastname;
+        // }
 
-        $response = $request->subscriber->post( $args );
+        // $response = $request->subscriber->post( $args );
 
-        if ($response->isError) {
-            return $this->jsonResponse(['success' => false, 'message' => $response->error], 400);
-        } else {
-            $subscriberId = $response->response['response']['data']['id'];
+        // if ($response->isError) {
+        //     return $this->jsonResponse(['success' => false, 'message' => $response->error], 400);
+        // } else {
+        //     $subscriberId = $response->response['response']['data']['id'];
 
-            $subscriber = new \PMAPISubscriber($request,$subscriberId);
+        //     $subscriber = new \PMAPISubscriber($request,$subscriberId);
 
-            if($subscriber){
-                $response = $subscriber->sendOptInEmail(PMAPI_LIST_ID);
-            }
-        }
+        //     if($subscriber){
+        //         $response = $subscriber->sendOptInEmail(PMAPI_LIST_ID);
+        //     }
+        // }
 
         return $this->jsonResponse(['success' => true, 'message' => 'Subscriber added successfully']);
     }

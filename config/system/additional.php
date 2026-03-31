@@ -112,8 +112,8 @@ switch ( $hostname ) {
         define( 'PMAPI_LIST_ID_BLOG', 72736 ); //
 
         #DEBUG
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['debug']                 = '1';
-        $GLOBALS['TYPO3_CONF_VARS']['BE']['debug']                 = '1';
+        $GLOBALS['TYPO3_CONF_VARS']['FE']['debug']                 = '0';
+        $GLOBALS['TYPO3_CONF_VARS']['BE']['debug']                 = '0';
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['devIPmask']            = '172.20.0.10';
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['displayErrors']        = '1';
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['enableDeprecationLog'] = '';
