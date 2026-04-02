@@ -23,3 +23,35 @@ plugin.tx_hosteuropefaq_apivote < plugin.tx_hosteuropefaq
 plugin.tx_hosteuropefaq_apisend < plugin.tx_hosteuropefaq
 plugin.tx_hosteuropefaq_search < plugin.tx_hosteuropefaq
 plugin.tx_hosteuropefaq_suggest < plugin.tx_hosteuropefaq
+
+# JSON vote API (Extbase Apivote plugin). Use with f:uri.page(..., pageType: 1009, additionalParams: { tx_hosteuropefaq_apivote: { q: uid, v: 0|1 } }).
+# If you already define typeNum 1009 in the DB template, remove or merge this block to avoid duplicates.
+hosteuropeFaqApiVote = PAGE
+hosteuropeFaqApiVote {
+    typeNum = 1009
+    config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+    }
+    10 = EXTBASEPLUGIN
+    10 {
+        extensionName = HosteuropeFaq
+        pluginName = Apivote
+    }
+}
+
+hosteuropeFaqApiSend = PAGE
+hosteuropeFaqApiSend {
+    typeNum = 1008
+    config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+    }
+    10 = EXTBASEPLUGIN
+    10 {
+        extensionName = HosteuropeFaq
+        pluginName = Apisend
+    }
+}

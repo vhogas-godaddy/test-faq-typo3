@@ -223,51 +223,42 @@ class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
     protected function sendAction()
     {
-
         $arguments = $this->request->getArguments();
-        $qUid = intval($arguments['q']);
 
-        if (!$qUid) {
-            return die(json_encode(array('status' => 400, 'code' => 4001)));
+        if (empty($arguments['q']) || empty($arguments['name']) || empty($arguments['kundennummer']) || empty($arguments['email']) || empty($arguments['kommentar'])) {
+            return $this->jsonResponse(json_encode(array('status' => 400, 'code' => 4001)));
         }
+
+        $qUid = intval($arguments['q']);
 
         /**
          * @var Question $question
          */
         $question = $this->questionRepository->findByUid($qUid);
 
-        if (!$question) {
-            return die(json_encode(array('status' => 400, 'code' => 4002)));
+        if (empty($question)) {
+            return $this->jsonResponse(json_encode(array('status' => 400, 'code' => 4002)));
         }
 
-        $gRecaptchaResponse = $_POST['g-recaptcha-response'];
+        $question->setCountsend(intval($question->getCountsend() + 1));
 
-        if (!$gRecaptchaResponse) {
-            return die(json_encode(array('status' => 400, 'code' => 4003)));
+        $this->questionRepository->update($question);
+
+        $gRecaptchaResponse = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+
+        if (empty($gRecaptchaResponse)) {
+            return $this->jsonResponse(json_encode(array('status' => 400, 'code' => 4003)));
         }
-
 
         //CHeck Captcha
         require_once(__DIR__ . '/../../Resources/Private/lib/src/autoload.php');
         $recaptcha = new \ReCaptcha\ReCaptcha(getenv('RECAPTCHA_SECRET_KEY'));
 
         $resp = $recaptcha->verify($gRecaptchaResponse, $_SERVER['REMOTE_ADDR']);
-        if ($resp->isSuccess()) {
-
-        } else {
+        if (!$resp->isSuccess()) {
             $errors = $resp->getErrorCodes();
-            return die(json_encode(array('status' => 400, 'code' => 4004, 'errors' => $errors)));
+            return $this->jsonResponse(json_encode(array('status' => 400, 'code' => 4004, 'errors' => $errors)));
         }
-
-
-        $question->setCountsend(intval($question->getCountsend() + 1));
-
-        $this->questionRepository->update($question);
-
-
-        $persistenceManager = $this->objectManager->get("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
-        $persistenceManager->persistAll();
-
 
         //Read Contents
         $name = $arguments['name'];
@@ -296,31 +287,14 @@ Referrer: " . $_SERVER['HTTP_REFERER'] . "
 User-Agent:" . $_SERVER['HTTP_USER_AGENT'] . "
 ++++++++++++
 ";
-        /*
-    $mail = GeneralUtility::makeInstance( 'TYPO3\\CMS\\Core\\Mail\\MailMessage' );
 
-
-
-    $mail
-      // Give the message a subject
-      ->setSubject('FAQ Kommentar:  '.$question->getHeadline() )
-      // Set the From address with an associative array
-      ->setFrom( array( 'support@hosteurope.de' => 'hosteurope.de' ) )
-      // Set the To addresses with an associative array
-      ->setTo( 'faq-kommentare@hosteurope.de') //,'faq-kommentare@hosteurope.de'
-      //->setTo( 'CarstenD@Dittmann-Media.de')
-      // Give it a body
-      ->setBody( $body )
-      // And finally do send it
-      ->send();
-        */
-        $apibe = $this->objectManager->get('HostEuropeGmbh\\HosteuropeTemplate\\Helper\\APIBE\\Handler');
+        $apibe = GeneralUtility::makeInstance(\HostEuropeGmbh\HosteuropeTemplate\Helper\APIBE\Handler::class);
 
         $res = $apibe->sendContactMail('faq-kommentare@hosteurope.de', 'support@hosteurope.de', 'FAQ Kommentar:  ' . $question->getHeadline(), $body);
         if ($res) {
-            return die(json_encode(array('status' => 200, 'code' => 2000)));
+            return $this->jsonResponse(json_encode(array('status' => 200, 'code' => 2000)));
         } else {
-            return die(json_encode(array('status' => 400, 'code' => 0)));
+            return $this->jsonResponse(json_encode(array('status' => 400, 'code' => 0)));
         }
 
     }
@@ -329,70 +303,32 @@ User-Agent:" . $_SERVER['HTTP_USER_AGENT'] . "
     protected function voteAction()
     {
         $arguments = $this->request->getArguments();
-        $qUid = intval($arguments['q']);
-        $vote = intval($arguments['v']);
 
-        if (!$qUid) {
-            return die(json_encode(array('status' => 400, 'code' => 4001)));
+        if (empty($arguments['q']) || empty($arguments['v'])) {
+            return $this->jsonResponse(json_encode(array( 'status' => 400, 'code' => 4001 )));
         }
 
-        /**
-         * @var Question $question
-         */
-        $question = $this->questionRepository->findByUid($qUid);
+        $questionId = $arguments['q'];
+        $vote = $arguments['v'];
 
-        if (!$question) {
-            return die(json_encode(array('status' => 400, 'code' => 4002)));
+
+        $question = $this->questionRepository->findByUid($questionId);
+
+        if(empty($question)){
+            return $this->jsonResponse(json_encode(array( 'status' => 400, 'code' => 4002 )));
         }
 
-        if ($vote == 1) {
-            //Vote JA
-            $question->setCountja(intval($question->getCountja()) + 1);
+        if($vote == 1){
+            $question->setCountja($question->getCountja() + 1);
         } else {
-            //Vote Nein
-            $question->setCountnein(intval($question->getCountnein()) + 1);
+            $question->setCountnein($question->getCountnein() + 1);
         }
 
         $this->questionRepository->update($question);
 
-
-        $persistenceManager = $this->objectManager->get("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
-        $persistenceManager->persistAll();
-
-        return die(json_encode(array('status' => 200, 'code' => 2000)));
+        return $this->jsonResponse(json_encode(array( 'status' => 200, 'code' => 2000 )));
     }
 
-
-    protected function viewAction()
-    {
-        $arguments = $this->request->getArguments();
-        $qUid = intval($arguments['q']);
-
-
-        if (!$qUid) {
-            return die(json_encode(array('status' => 400, 'code' => 4001)));
-        }
-
-        /**
-         * @var Question $question
-         */
-        $question = $this->questionRepository->findByUid($qUid);
-
-        if (!$question) {
-            return die(json_encode(array('status' => 400, 'code' => 4002)));
-        }
-
-        $question->setCountview($question->getCountview() + 1);
-
-
-        $this->questionRepository->update($question);
-
-
-        $persistenceManager = $this->objectManager->get("TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager");
-        $persistenceManager->persistAll();
-
-        return die(json_encode(array('status' => 200, 'code' => 2000)));
-    }
 
     private function _displayCancelCookieHint()
     {

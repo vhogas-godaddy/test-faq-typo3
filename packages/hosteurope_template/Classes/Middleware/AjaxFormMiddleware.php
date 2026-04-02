@@ -12,6 +12,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class AjaxFormMiddleware implements MiddlewareInterface
 {
+    /** Handled here (before full FE TypoScript). Other ajaxtype values pass through to normal frontend routing. */
+    private const MIDDLEWARE_AJAX_TYPES = ['newsletter', 'getcustomer'];
 
     public function __construct(
         private readonly AjaxController $ajaxController,
@@ -20,7 +22,7 @@ final class AjaxFormMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $ajaxType = strtolower((string)($request->getQueryParams()['ajaxtype'] ?? ''));
-        if (!empty($ajaxType)) {
+        if ($ajaxType !== '' && in_array($ajaxType, self::MIDDLEWARE_AJAX_TYPES, true)) {
             return $this->ajaxController->handleAction($request);
         }
 
