@@ -1,0 +1,8 @@
+.git
+README.md
+LICENSE
+INSTALL.md
+/public/typo3temp
+/public/fileadmin
+/public/_assets
+/var

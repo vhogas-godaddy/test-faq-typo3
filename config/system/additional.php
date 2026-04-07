@@ -15,7 +15,8 @@ switch ( $hostname ) {
             'server30.www.hosteurope.de',
             'server31.www.hosteurope.de',
             'ww2.hosteurope.de',
-            'faqedit.hosteurope.de'
+            'faqedit.hosteurope.de',
+            'storefront.hosteurope.de'
         ) ):
 
         define( 'PMAPI_CID', 38499 ); // Company ID
@@ -50,7 +51,7 @@ switch ( $hostname ) {
             $GLOBALS['TYPO3_CONF_VARS']['SYS']['reverseProxyHeaderMultiValue'] = 'last';
             $GLOBALS['TYPO3_CONF_VARS']['SYS']['reverseProxySSL'] = '*';
             $GLOBALS['TYPO3_CONF_VARS']['SYS']['trustedHostsPattern'] = 'storefront.hosteurope.de';
-            $GLOBALS['TYPO3_CONF_VARS']['BE']['IPmaskList'] = '10.83.*.*,10.38.*.*,62.138.161.*,132.148.54.*,160.153.26.*,166.62.16.*';
+            $GLOBALS['TYPO3_CONF_VARS']['BE']['IPmaskList'] = '10.83.*.*,10.38.*.*,62.138.161.*,132.148.54.*,160.153.26.*,166.62.16.*,10.129.*.*';
         }
 
         #MYSQL

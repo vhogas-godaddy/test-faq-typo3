@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor entityID="http://www.okta.com/exkwtimnnesn7ulKd0x7" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"><md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:KeyDescriptor use="signing"><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:X509Data><ds:X509Certificate>MIIDnjCCAoagAwIBAgIGAYNGZBmcMA0GCSqGSIb3DQEBCwUAMIGPMQswCQYDVQQGEwJVUzETMBEG
+    A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU
+    MBIGA1UECwwLU1NPUHJvdmlkZXIxEDAOBgNVBAMMB2dvZGFkZHkxHDAaBgkqhkiG9w0BCQEWDWlu
+    Zm9Ab2t0YS5jb20wHhcNMjIwOTE2MTMwMDQ4WhcNMzIwOTE2MTMwMTQ4WjCBjzELMAkGA1UEBhMC
+    VVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoM
+    BE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRAwDgYDVQQDDAdnb2RhZGR5MRwwGgYJKoZIhvcN
+    AQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr43XMQ1m
+    SCplZIvMAbfefr+36uUVIHxlhTEqPAOqLuoqq4BnHe6Ur7e1gu33GIV5uwvFWt6vglJlf667NZQx
+    JFL/KNTOcEzCim46IBxVDFkvcgAzNZufuyg01iSg0XbqZuUpU7mcOEnp2XSx0GAlQaBRmLkpApxH
+    /OgD77foy0G4x0oo/lZxxK9Q2nIauVyoIcLwdqpZA0y5hk7omkgFBafCK6OWtrtTI4rwHz93PWX4
+    AJ5FfYTQiCO8crSdNXG5bq5QVWLjxesw64PIdAg7h9KgaADQ4JuKmjSrNAvZfNGq9s9teuHVTpqc
+    lD9mbap2TMl309br24rT9U/w8lRfkQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQCMapqQtzFHvGnr
+    OobzgZ5+m7piFN43HyOg4pPq8//Ioy0a3V07/5efYZXFXV5kaC6D7LO7QZTML/t0RVcYqID3+qzq
+    XoEErcX85Y3oF4fegngfeY64c6fLkEUmTsVNFfr45gZlWCydmIGH9KQ7zX6cK9Lr/GmUvJB5g6Hv
+    svEF5AUSBMjCGhpNNHivPjZeg4s2jHiwXzN08D17YNSJ8d1zJRRZVaw/Ro+WuzXeGNSUyf8Bevzm
+    UKxA2lmoYobOuHu47seLTRSJyAVI7CLaMVpNhvNUW/QTBOljhMMZQe8dDjK+BvZi1ZNfXW/BPY88
+    QbaWsMxLLrHo3Ek9tyvkwpAw</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://godaddy.okta.com/app/godaddy_hefaqeditstaging_1/exkwtimnnesn7ulKd0x7/sso/saml"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://godaddy.okta.com/app/godaddy_hefaqeditstaging_1/exkwtimnnesn7ulKd0x7/sso/saml"/></md:IDPSSODescriptor></md:EntityDescriptor>
