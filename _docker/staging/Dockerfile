@@ -22,29 +22,32 @@ ADD ./ /var/www/
 
 RUN apt-get install -y libapache2-mod-auth-mellon wget nano openssl && \
     a2enmod auth_mellon && \
-    mkdir -p /etc/apache2/mellon/ && cd /etc/apache2/mellon/
-
-ADD ./_docker/staging/mellon/mellon_create_metadata_fixed.sh /etc/apache2/mellon/mellon_create_metadata_fixed.sh
-
-RUN chmod +x /etc/apache2/mellon/mellon_create_metadata_fixed.sh && \
-    /bin/bash /etc/apache2/mellon/mellon_create_metadata_fixed.sh he-faq-edit-staging-0242ac120002 http://storefront.hosteurope.de/typo3/secret/endpoint
+    mkdir -p /etc/apache2/mellon/ && cd /etc/apache2/mellon/ && \
+    mellon_create_metadata he-faq-edit-staging-0242ac120002 http://storefront.hosteurope.de/typo3/secret/endpoint
 
 ADD ./_docker/staging/mellon/idp.xml /etc/apache2/mellon/idp.xml
+ADD ./_docker/staging/mellon/auth_mellon.conf /etc/apache2/mods-available/auth_mellon.conf
 
 RUN	a2enmod php8.3 && a2enmod rewrite && a2enmod lbmethod_byrequests
 
 RUN rm -rf /var/www/public/typo3temp && \
     mkdir -p /var/www/public/typo3temp && \
-    chmod -R a+rwx /var/www/public/typo3temp && \
     rm -rf /var/www/public/_assets && \
     mkdir -p /var/www/public/_assets && \
-    chmod -R a+rwx /var/www/public/_assets && \
     mkdir -p /var/www/public/fileadmin && \
     mkdir -p /var/www/var && \
-    chmod -R a+rwx /var/www && \
+    mkdir -p /var/cache/apache2/mod_auth_mellon && \
+    chmod -R a+rwx /var/www/public/typo3temp && \
+    chmod -R a+rwx /var/www/public/_assets && \
+    chmod -R a+rwx /var/www/public/fileadmin && \
+    chmod -R a+rwx /var/www/var && \
+    chmod -R a+rwx /var/www/config && \
+    chmod -R a+rX /var/www/packages && \
     chown -R www-data:www-data /var/www/public && \
     chown -R www-data:www-data /etc/apache2/mellon && \
     chmod -R a+rwx /etc/apache2/mellon && \
+    chown -R www-data:www-data /var/cache/apache2/mod_auth_mellon && \
+    chmod 770 /var/cache/apache2/mod_auth_mellon && \
     chmod -R a+rwx /var/run/apache2 && \
     chmod -R a+rwx /var/log/apache2
 
