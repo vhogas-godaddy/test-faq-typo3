@@ -9,13 +9,15 @@ RUN apt-get -y --allow-downgrades --allow-remove-essential --allow-change-held-p
 RUN apt-get -y --allow-downgrades --allow-remove-essential --allow-change-held-packages install \
 	php8.3 php8.3-common php8.3-opcache php8.3-cli php8.3-gd php8.3-curl php8.3-mysql && \
 	apt-get -y --allow-downgrades --allow-remove-essential --allow-change-held-packages install \
-	php8.3-pspell php8.3-tidy php8.3-mbstring php8.3-soap php8.3-zip php8.3-xsl php8.3-xml zip mysql-client
+	php8.3-pspell php8.3-tidy php8.3-mbstring php8.3-soap php8.3-zip php8.3-xsl php8.3-xml php8.3-intl zip mysql-client
 
 RUN cd /var/www/html && rm -rf /var/www/*
 
 ADD ./_docker/staging/000-default.conf /etc/apache2/sites-available/000-default.conf
 ADD ./_docker/staging/ports.conf /etc/apache2/ports.conf
 ADD ./_docker/staging/apache2.conf /etc/apache2/apache2.conf
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
 ADD ./ /var/www/
 
 RUN apt-get install -y libapache2-mod-auth-mellon wget nano openssl && \
@@ -39,7 +41,7 @@ RUN rm -rf /var/www/public/typo3temp && \
     chmod -R a+rwx /var/www/public/_assets && \
     mkdir -p /var/www/public/fileadmin && \
     mkdir -p /var/www/var && \
-    chmod -R a+rwx /var/www/var && \
+    chmod -R a+rwx /var/www && \
     chown -R www-data:www-data /var/www/public && \
     chown -R www-data:www-data /etc/apache2/mellon && \
     chmod -R a+rwx /etc/apache2/mellon && \
@@ -71,6 +73,8 @@ ENV HOST_CUSTOM_PREFIX=${HOST_CUSTOM_PREFIX} \
     PPE_PASSWORD=${PPE_PASSWORD}
 
 WORKDIR /var/www
+RUN composer install --no-dev --optimize-autoloader
+
 EXPOSE 8080
 
 USER www-data

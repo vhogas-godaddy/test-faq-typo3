@@ -2,7 +2,9 @@
 README.md
 LICENSE
 INSTALL.md
+composer.lock
 /public/typo3temp
 /public/fileadmin
 /public/_assets
 /var
+/vendor

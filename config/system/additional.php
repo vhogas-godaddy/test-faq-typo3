@@ -2,7 +2,7 @@
 
 setlocale( LC_TIME, "de_DE.UTF-8" );
 
-$hostname           = $_SERVER['HTTP_HOST'];
+$hostname           = $_SERVER['HTTP_HOST'] ?? 'dockerlocal.hosteurope.de';
 
 
 switch ( $hostname ) {
@@ -51,7 +51,7 @@ switch ( $hostname ) {
             $GLOBALS['TYPO3_CONF_VARS']['SYS']['reverseProxyHeaderMultiValue'] = 'last';
             $GLOBALS['TYPO3_CONF_VARS']['SYS']['reverseProxySSL'] = '*';
             $GLOBALS['TYPO3_CONF_VARS']['SYS']['trustedHostsPattern'] = 'storefront.hosteurope.de';
-            $GLOBALS['TYPO3_CONF_VARS']['BE']['IPmaskList'] = '10.83.*.*,10.38.*.*,62.138.161.*,132.148.54.*,160.153.26.*,166.62.16.*,10.129.*.*';
+            $GLOBALS['TYPO3_CONF_VARS']['BE']['IPmaskList'] = '10.83.*.*,10.38.*.*,62.138.161.*,132.148.54.*,160.153.26.*,166.62.16.*,10.92.*.*';
         }
 
         #MYSQL
