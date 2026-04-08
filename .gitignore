@@ -4,5 +4,5 @@ nbproject
 /var/*
 !/var/labels
 /vendor
-/public/*
-!/public/.htaccess
+/public/_assets
+/public/typo3temp
