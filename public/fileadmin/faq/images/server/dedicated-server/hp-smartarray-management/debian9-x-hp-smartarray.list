@@ -1,0 +1,3 @@
+##### Repository for HP Smart Array - Management #####
+
+deb http://downloads.linux.hpe.com/SDR/repo/mcp/debian stretch/current non-free

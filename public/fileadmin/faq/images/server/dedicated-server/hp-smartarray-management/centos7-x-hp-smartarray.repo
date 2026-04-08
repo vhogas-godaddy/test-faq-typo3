@@ -1,0 +1,9 @@
+##### Repository for HP Smart Array - Management #####
+
+[HP-mcp]
+name=HP Software Delivery Repository for mcp
+baseurl=http://downloads.linux.hpe.com/SDR/repo/mcp/CentOS/$releasever/$basearch/current
+enabled=1
+gpgcheck=0
+#gpgcheck=1
+#gpgkey=http://downloads.linux.hpe.com/SDR/repo/mcp/GPG-KEY-mcp

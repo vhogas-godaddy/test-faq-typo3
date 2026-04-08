@@ -72,55 +72,55 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $expand_mode = 0;
 
 
-        $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
-            $query,
-            $label = "",
-            $categories = array(),
-            $s_language_uid,
-            $offset = 0,
-            $limit = 100,
-            $expand = 0,
-            $sort_by = null,
-            $sort = "asc",
-            $highlight = true);
+//        $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
+//            $query,
+//            $label = "",
+//            $categories = array(),
+//            $s_language_uid,
+//            $offset = 0,
+//            $limit = 100,
+//            $expand = 0,
+//            $sort_by = null,
+//            $sort = "asc",
+//            $highlight = true);
 
         $suggest_option = false;
 
-
-        //Erweitern um *
-        if ($search_result['hits']['total']['value'] == 0) {
-            $expand_mode++;
-
-            $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
-                $query,
-                $label = "",
-                $categories = array(),
-                $s_language_uid,
-                $offset = 0,
-                $limit = 100,
-                $expand_mode
-            );
-
-            if (!empty($search_result['suggest']['suggestion'][0]['options'])) {
-
-                $suggest_option = $search_result['suggest']['suggestion'][0]['options'][0]['text'];
-
-            }
-        }
+//
+//        //Erweitern um *
+//        if ($search_result['hits']['total']['value'] == 0) {
+//            $expand_mode++;
+//
+//            $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
+//                $query,
+//                $label = "",
+//                $categories = array(),
+//                $s_language_uid,
+//                $offset = 0,
+//                $limit = 100,
+//                $expand_mode
+//            );
+//
+//            if (!empty($search_result['suggest']['suggestion'][0]['options'])) {
+//
+//                $suggest_option = $search_result['suggest']['suggestion'][0]['options'][0]['text'];
+//
+//            }
+//        }
         $this->view->assign('suggest_option', $suggest_option);
 
-        $expand_mode = 0;
-        $return_object['all'] = array(
-            'name' => 'Alle Ergebnisse',
-            'results' => $search_result['hits']['hits'],
-            'total' => $search_result['hits']['total']['value'],
-
-        );
-        if (is_null($s) or $s == "a" or $s == "") {
-            $return_object['all']['active'] = true;
-        } else {
-            $return_object['all']['active'] = false;
-        }
+//        $expand_mode = 0;
+//        $return_object['all'] = array(
+//            'name' => 'Alle Ergebnisse',
+//            'results' => $search_result['hits']['hits'],
+//            'total' => $search_result['hits']['total']['value'],
+//
+//        );
+//        if (is_null($s) or $s == "a" or $s == "") {
+//            $return_object['all']['active'] = true;
+//        } else {
+//            $return_object['all']['active'] = false;
+//        }
 
 
         $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
@@ -129,7 +129,7 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $categories = array(),
             $s_language_uid,
             $offset = 0,
-            $limit = 100,
+            $limit = 150,
             $expand_mode);
 
         if ($search_result['hits']['total']['value'] > 0) {
@@ -145,50 +145,6 @@ class SearchController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             }
 
 
-        }
-
-        $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
-            $query,
-            'products',
-            $categories = array(),
-            $s_language_uid,
-            $offset = 0,
-            $limit = 100,
-            $expand_mode);
-
-
-        if ($search_result['hits']['total']['value'] > 0) {
-            $return_object['products'] = array(
-                'name' => 'Produkte',
-                'results' => $search_result['hits']['hits'],
-                'total' => $search_result['hits']['total']['value'],
-            );
-            if ($s == "p") {
-                $return_object['products']['active'] = true;
-            } else {
-                $return_object['products']['active'] = false;
-            }
-        }
-
-        $search_result = \HostEuropeGmbh\HosteuropeTemplate\Helper\Elasticsearch\Resource::search(
-            $query,
-            'other',
-            $categories = array(),
-            $s_language_uid,
-            $offset = 0,
-            $limit = 100,
-            $expand_mode);
-        if ($search_result['hits']['total']['value'] > 0) {
-            $return_object['other'] = array(
-                'name' => 'Sonstiges',
-                'results' => $search_result['hits']['hits'],
-                'total' => $search_result['hits']['total']['value'],
-            );
-            if ($s == "o") {
-                $return_object['other']['active'] = true;
-            } else {
-                $return_object['other']['active'] = false;
-            }
         }
 
         return $return_object;

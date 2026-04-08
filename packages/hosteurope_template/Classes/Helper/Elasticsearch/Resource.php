@@ -258,12 +258,12 @@ class Resource {
 			$params['body']['query']['bool']['must'] = array(
 				array(
 					'query_string' => array(
-						'fields'           => array(
+						'fields' => array(
 							"s_name^5",
 							"s_description^3",
 							"s_categories^2",
 							"s_text^2",
-							"_all",
+							"*",
 						),
 						'query'            => $query,
 						"default_operator" => "and",
@@ -302,13 +302,6 @@ class Resource {
 			"s_url",
 			"s_label",
 		);
-
-
-		if ( false ) {
-			$params['body']['highlight']['fields'] = array(
-				's_description' => array( 'type' => "plain" ),
-			);
-		}
 
 		$params['body']['from'] = $offset;
 		$params['body']['size'] = $limit;
